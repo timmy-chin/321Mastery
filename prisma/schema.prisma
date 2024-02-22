@@ -5,22 +5,62 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// Define your datasource block with the appropriate provider and connection URL
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "postgresql" // You should use the correct provider for your database
+  url      = env("DATABASE_URL") // Replace with your actual database connection URL
 }
 
 model User {
   id  Int @id @default(autoincrement())
   email String @unique
   password String 
-  toDos ToDo[]
+  firstName String
+  lastName String
+  gender String
+  cpVerified Int
+  dlVerified Int
+  sentMessages Message[] @relation("Sender")
+  recievedMessages Message[] @relation("Recipient")
+  ridesGiven Ride[] @relation("Driver")
+  ridesRequested Request[] @relation("Requester")
 }
 
-model ToDo {
+model Message {
   id Int @id @default(autoincrement())
-  value String
-  done Boolean
-  owner User @relation(fields: [ownerId], references: [id])
-  ownerId Int 
+  content String
+  request Boolean
+  time DateTime
+  senderId Int @unique
+  recipientId Int
+  sender User @relation(name: "Sender", fields: [senderId], references: [id])
+  recipient User @relation(name: "Recipient", fields: [recipientId], references: [id])
 }
+
+model Request {
+  id Int @id @default(autoincrement())
+  request Boolean
+  time DateTime
+  rideId Int @unique
+  requesterId Int
+  ride Ride @relation(name: "Ride", fields: [rideId], references: [id])
+  requester User @relation(name: "Requester", fields: [requesterId], references: [id])
+}
+
+model Ride {
+  id Int @id @default(autoincrement())
+  startLoc String
+  endLoc String
+  stops String
+  request Boolean
+  arriveTime DateTime
+  startTime DateTime
+  numStops Int
+  driverId Int
+  
+  driver User @relation(name: "Driver", fields: [driverId], references: [id])
+  rideRequests Request[] @relation("Ride")
+}
+
+
+// Add accepted requests? Stored in Ride? how?
