@@ -1,12 +1,12 @@
-import { Inter } from 'next/font/google'
-import RootLayout from './RootLayout';
-import AuthProvider from './AuthProvider';
+import { Inter } from "next/font/google";
+import RootLayout from "./RootLayout";
+import AuthProvider from "./AuthProvider";
 
-const inter = Inter({ subsets: ['latin'] })
-const COMPANY_NAME = "MyCompany";
+const inter = Inter({ subsets: ["latin"] });
+const COMPANY_NAME = "Carpool With Me";
 
 export const metadata = {
-  title: COMPANY_NAME
+  title: COMPANY_NAME,
 };
 
 export default function Layout({ children }) {
@@ -14,9 +14,9 @@ export default function Layout({ children }) {
     <html lang="en">
       <body>
         <AuthProvider>
-          <RootLayout children={children} title={COMPANY_NAME}/>        
+          <RootLayout children={children} title={COMPANY_NAME} />
         </AuthProvider>
       </body>
     </html>
-  )
+  );
 }

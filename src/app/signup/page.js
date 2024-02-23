@@ -1,5 +1,5 @@
+"use client";
 import Image from "next/image";
-import Link from "next/link";
 
 export default function Home() {
   return (
@@ -18,9 +18,9 @@ export default function Home() {
         alt="Carpool Logo"
         style={{ width: "150px", height: "150px", marginBottom: "20px" }}
       />
-      <h2>Login</h2>
+      <h2>Sign-Up</h2>
       <form style={{ textAlign: "center" }}>
-        <label htmlFor="username">Username:</label>
+        <label htmlFor="username">CalPoly Email:</label>
         <input
           type="text"
           id="username"
@@ -36,16 +36,32 @@ export default function Home() {
           required
         />
         <br />
-        <button type="submit">
-          {" "}
-          <Link href="/driver_home">Login</Link>
-        </button>
+        <label htmlFor="firstname">Enter your First Name:</label>
+        <input
+          type="text"
+          id="firstname"
+          placeholder="Enter your First Name"
+          required
+        />
+        <br />
+        <label htmlFor="lastname">Enter your Last Name:</label>
+        <input
+          type="text"
+          id="lastname"
+          placeholder="Enter your Last Name"
+          required
+        />
+        <br />
+        <label htmlFor="password">Confirm Password:</label>
+        <input
+          type="password"
+          id="password"
+          placeholder="Enter your password again"
+          required
+        />
+        <br />
+        <button type="submit">Sign-Up</button>
       </form>
-      <div style={{ marginTop: "20px" }}>
-        <p>
-          Don't have an account? <Link href="/signup"> Sign-Up</Link>
-        </p>
-      </div>
     </div>
   );
 }
