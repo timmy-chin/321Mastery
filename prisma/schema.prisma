@@ -43,6 +43,8 @@ model Request {
   time DateTime
   rideId Int @unique
   requesterId Int
+  status Boolean
+  accepted Boolean
   ride Ride @relation(name: "Ride", fields: [rideId], references: [id])
   requester User @relation(name: "Requester", fields: [requesterId], references: [id])
 }
@@ -57,10 +59,6 @@ model Ride {
   startTime DateTime
   numStops Int
   driverId Int
-  
   driver User @relation(name: "Driver", fields: [driverId], references: [id])
   rideRequests Request[] @relation("Ride")
 }
-
-
-// Add accepted requests? Stored in Ride? how?
