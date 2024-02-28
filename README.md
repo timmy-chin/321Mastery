@@ -30,6 +30,12 @@ npx prisma migrate dev
 
 Name the migration `initial`
 
+Install Google Maps React
+
+```bash
+npm i @vis.gl/react-google-maps
+```
+
 Finally, run the development server:
 
 ```bash
