@@ -2,6 +2,15 @@
 import Image from "next/image";
 
 export default function Home() {
+
+  function handleSignup(event){
+    const data = new FormData(event.currentTarget);
+    fetch('/api/users', {
+      method: "post",
+      body: data
+    });
+  }
+
   return (
     <div
       style={{
@@ -19,12 +28,13 @@ export default function Home() {
         style={{ width: "150px", height: "150px", marginBottom: "20px" }}
       />
       <h2>Sign-Up</h2>
-      <form style={{ textAlign: "center" }}>
-        <label htmlFor="username">CalPoly Email:</label>
+      <form onSubmit={handleSignup} style={{ textAlign: "center" }}>
+        <label htmlFor="email">CalPoly Email:</label>
         <input
           type="text"
-          id="username"
-          placeholder="Enter your username"
+          id="email"
+          name="email"
+          placeholder="Enter your email"
           required
         />
         <br />
@@ -32,6 +42,7 @@ export default function Home() {
         <input
           type="password"
           id="password"
+          name="password"
           placeholder="Enter your password"
           required
         />
@@ -40,6 +51,7 @@ export default function Home() {
         <input
           type="text"
           id="firstname"
+          name="firstname"
           placeholder="Enter your First Name"
           required
         />
@@ -48,6 +60,7 @@ export default function Home() {
         <input
           type="text"
           id="lastname"
+          name="lastname"
           placeholder="Enter your Last Name"
           required
         />
@@ -55,7 +68,8 @@ export default function Home() {
         <label htmlFor="password">Confirm Password:</label>
         <input
           type="password"
-          id="password"
+          id="confirmation"
+          name="confirmation"
           placeholder="Enter your password again"
           required
         />
