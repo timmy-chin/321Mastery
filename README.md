@@ -33,7 +33,7 @@ Name the migration `initial`
 Install Google Maps React
 
 ```bash
-npm i @vis.gl/react-google-maps
+npm i -S @react-google-maps/api
 ```
 
 Finally, run the development server:
