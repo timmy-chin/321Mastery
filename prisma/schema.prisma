@@ -53,12 +53,25 @@ model Ride {
   id Int @id @default(autoincrement())
   startLoc String
   endLoc String
-  stops String
-  request Boolean
-  arriveTime DateTime
-  startTime DateTime
+  stops String?
+  request String
+  date String
+  time String
   numStops Int
   driverId Int
+  seats String
+  price String
   driver User @relation(name: "Driver", fields: [driverId], references: [id])
   rideRequests Request[] @relation("Ride")
+}
+
+model Posting {
+  id Int @id @default(autoincrement())
+  startLoc String
+  endLoc String
+  date String
+  time String
+  driverId Int
+  seats String
+  price String
 }

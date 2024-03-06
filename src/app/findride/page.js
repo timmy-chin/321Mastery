@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Home() {
   const [location, setLocation] = useState("");
@@ -8,52 +8,10 @@ function Home() {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [recur, setRecur] = useState(false);
-  const [result, setResult] = useState([]);
+  const [posting, setPosting] = useState([]);
 
   const pfpList = [
-    "https://g.foolcdn.com/editorial/images/760448/shiba-inu-dog-doge-dogecoin.jpeg",
-    "https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcQgXnC_jmYjZKWSF9TaUw-8SEsKlZ2wFQ1LVJMJy4Aqn8eFktRZrZ5r-ZV6-Ea5i_nshjPSX5NDODqZZ60",
-    "https://mymodernmet.com/wp/wp-content/uploads/2020/10/cooper-baby-corgi-dogs-8.jpg",
-    "https://dogtime.com/wp-content/uploads/sites/12/2023/11/GettyImages-1329412827-e1701097258260.jpg?w=1024",
-  ];
-
-  const driverList = [
-    {
-      name: "Timmy",
-      seat: 4,
-      location: "Devaul Park",
-      destination: "Cal Poly",
-      date: "04/10/2024",
-      time: "01:00",
-      pfp: 0,
-    },
-    {
-      name: "Kylar",
-      seat: 3,
-      location: "Foothill",
-      destination: "Bonderson",
-      date: "05/10/2024",
-      time: "02:00",
-      pfp: 1,
-    },
-    {
-      name: "Ivan",
-      seat: 2,
-      location: "Laguna",
-      destination: "Baker",
-      date: "06/10/2024",
-      time: "03:00",
-      pfp: 2,
-    },
-    {
-      name: "Peter",
-      seat: 1,
-      location: "Pismo",
-      destination: "PCV",
-      date: "07/10/2024",
-      time: "04:00",
-      pfp: 3,
-    },
+    "https://t4.ftcdn.net/jpg/00/64/67/27/240_F_64672736_U5kpdGs9keUll8CRQ3p3YaEv2M6qkVY5.jpg",
   ];
 
   function locationChanged(event) {
@@ -77,29 +35,35 @@ function Home() {
   }
 
   function searchHandler() {
-    var newResult = [];
-    {
-      driverList.map((driver) => {
-        if (
-          driver.location == location ||
-          driver.destination == destination ||
-          driver.date == date ||
-          driver.time == time
-        ) {
-          const newDriver = {
-            name: driver.name,
-            seat: driver.seat,
-            location: driver.location,
-            destination: driver.destination,
-            date: driver.date,
-            time: driver.time,
-          };
-          newResult = newResult.concat(newDriver);
-          setResult(newResult);
-        }
-      });
-    }
+    const url = "api/rideposting?" + "startLoc=" + location + "&endLoc=" + destination + "&date=" + date + "&time=" + time;
+    fetch(url, { method: "get" }).then((response) => response.ok && response.json()).then(
+      post => {
+          post && setPosting(post);
+      }
+    );
+    
   }
+
+  useEffect(() => {
+    fetch("/api/rideposting", { method: "get" }).then((response) => response.ok && response.json()).then(
+        post => {
+            post && setPosting(post);
+        }
+    );
+  }, []);   
+
+  const listAllPost = posting.map((post, index) => (
+    <div>
+          <img src={pfpList[0]} width="100" height="100"></img>
+          <h3 key={index}>Driver ID: {post.driverId}</h3>
+          <h5 key={index}>Seats: {post.seats}</h5>
+          <h5 key={index}>Pick Up Location: {post.startLoc}</h5>
+          <h5 key={index}>Destination: {post.endLoc}</h5>
+          <h5 key={index}>Date: {post.date}</h5>
+          <h5 key={index}>Time: {post.time}</h5>
+          <h5 key={index}>Price: {post.price}</h5>
+    </div>
+  ));
 
   return (
     <div>
@@ -146,19 +110,7 @@ function Home() {
       <p></p>
 
       <h2>Drivers</h2>
-
-      {result.map((driver, index) => (
-        <div>
-          <img src={pfpList[index]} width="100" height="100"></img>
-          <h3 key={index}>{driver.name}</h3>
-          <h5 key={index}>Seats: {driver.seat}</h5>
-          <h5 key={index}>Pick Up Location: {driver.location}</h5>
-          <h5 key={index}>Destination: {driver.destination}</h5>
-          <h5 key={index}>Date: {driver.date}</h5>
-          <h5 key={index}>Time: {driver.time}</h5>
-          <p></p>
-        </div>
-      ))}
+      <p>{listAllPost}</p>
     </div>
   );
 }
