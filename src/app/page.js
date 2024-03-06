@@ -1,6 +1,48 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { signIn } from "next-auth/react";
+
+
+function handleLogin(event){
+  const data = new FormData(event.currentTarget);
+  fetch('/api/users', {
+    method: "get",
+    body: data
+  });
+}
+
+export default function Login() {
+  const [open, setOpen] = useState(false);
+  const [formValues, setFormValues] = useState({ email: "", password: "" });
+  const [error, setError] = useState(false);
+
+  function handleLoginButton() {
+    setOpen(true);
+  }
+
+  function handleClose() {
+    reset();
+    setOpen(false);
+  }
+
+  function reset() {
+    setError(false);
+    setFormValues({ email: "", password: "" });
+  }
+
+  function handleSignin() {
+    signIn("normal", { ...formValues, redirect: false }).then((result) => {
+      if (!result.error) {
+        setOpen(false);
+        reset();
+      } else {
+        setError(true);
+      }
+    });
+  }
+}
+
 export default function Home() {
   return (
     <div
@@ -19,12 +61,13 @@ export default function Home() {
         style={{ width: "150px", height: "150px", marginBottom: "20px" }}
       />
       <h2>Login</h2>
-      <form style={{ textAlign: "center" }}>
-        <label htmlFor="username">Username:</label>
+      <form onSubmit={handleLogin} style={{ textAlign: "center" }}>
+        <label htmlFor="email">Email:</label>
         <input
           type="text"
-          id="username"
-          placeholder="Enter your username"
+          id="email"
+          name="email"
+          placeholder="Enter your email"
           required
         />
         <br />
@@ -32,6 +75,7 @@ export default function Home() {
         <input
           type="password"
           id="password"
+          name="password"
           placeholder="Enter your password"
           required
         />
