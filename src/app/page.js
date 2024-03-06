@@ -8,15 +8,6 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { useRouter } from 'next/navigation'
 
-
-function handleLogin(event){
-  const data = new FormData(event.currentTarget);
-  fetch('/api/users', {
-    method: "get",
-    body: data
-  }).then(res)
-}
-
 export default function Login() {
   const [formValues, setFormValues] = useState({ email: "", password: "" });
   const [error, setError] = useState(false);

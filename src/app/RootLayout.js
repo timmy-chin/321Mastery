@@ -10,7 +10,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import NavBar from "./NavBar";
 //import Login from "./Login";
-//import Logout from "./Logout";
+import Logout from "./Logout";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 //import Signup from "./Signup";
 import { useSession } from "next-auth/react";
@@ -26,7 +26,7 @@ export default function RootLayout({ children, title }) {
   if (status == "authenticated"){
       loginSection = (
     <>
-      <Logout />
+      <Logout/>
     </>
   );
   };
