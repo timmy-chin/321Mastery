@@ -9,8 +9,8 @@ import AdbIcon from "@mui/icons-material/Adb";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import NavBar from "./NavBar";
-import Login from "./Login";
-import Logout from "./Logout";
+//import Login from "./Login";
+//import Logout from "./Logout";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 //import Signup from "./Signup";
 import { useSession } from "next-auth/react";
@@ -30,7 +30,6 @@ export default function RootLayout({ children, title }) {
     </>
   );
   };
-
   // if (status === "authenticated") {
   //   loginSection = (
   //     <Button variant="outlined" color="inherit" onClick={() => signOut()}>
@@ -73,7 +72,7 @@ export default function RootLayout({ children, title }) {
               <NavBar />
               <Box sx={{ flexGrow: 0 }}>
                 <Stack direction="row" spacing={2}>
-                  {loginSection}
+                  {/* {loginSection} */}
                 </Stack>
               </Box>
             </Toolbar>

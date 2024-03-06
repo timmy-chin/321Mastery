@@ -16,9 +16,9 @@ export default function Home() {
         textAlign: "center",
       }}
     >
-      <h1>Welcome Driver!</h1>
+      <h1>Welcome Rider!</h1>
       <p>
-        This is the driver homepage! Click on an option to continue or logout!
+        This is the rider homepage! Click on an option to continue or logout!
       </p>
       {/* Button container */}
       <Box
@@ -33,7 +33,7 @@ export default function Home() {
 
         <Button
           component={Link}
-          href="/driver_home/createride"
+          href="/findride"
           sx={{
             fontWeight: 700,
             width: "200px",
@@ -52,12 +52,12 @@ export default function Home() {
             },
           }}
         >
-          Create Rides
+          Find Rides
         </Button>
 
         <Button
-          component={Link}
-          href="/driver_home/active"
+          //component={Link}
+          //href="/driver_home/active"
           sx={{
             fontWeight: 700,
             width: "200px",
@@ -81,7 +81,7 @@ export default function Home() {
 
         <Button
           component={Link}
-          href="/driver_home/message"
+          href="/rider_home/message"
           sx={{
             fontWeight: 700,
             width: "200px",
@@ -105,7 +105,7 @@ export default function Home() {
 
         <Button
           component={Link}
-          href="/driver_home/profile"
+          href="/rider_home/profile"
           sx={{
             fontWeight: 700,
             width: "200px",
