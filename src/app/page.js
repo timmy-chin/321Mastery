@@ -1,7 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-
+import { useState } from "react";
 import { signIn } from "next-auth/react";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 
 
 function handleLogin(event){
@@ -9,22 +13,12 @@ function handleLogin(event){
   fetch('/api/users', {
     method: "get",
     body: data
-  });
+  }).then(res)
 }
 
 export default function Login() {
-  const [open, setOpen] = useState(false);
   const [formValues, setFormValues] = useState({ email: "", password: "" });
   const [error, setError] = useState(false);
-
-  function handleLoginButton() {
-    setOpen(true);
-  }
-
-  function handleClose() {
-    reset();
-    setOpen(false);
-  }
 
   function reset() {
     setError(false);
@@ -34,16 +28,17 @@ export default function Login() {
   function handleSignin() {
     signIn("normal", { ...formValues, redirect: false }).then((result) => {
       if (!result.error) {
-        setOpen(false);
         reset();
       } else {
         setError(true);
       }
     });
   }
-}
 
-export default function Home() {
+  function handleChange({ field, value }) {
+    setFormValues({ ...formValues, [field]: value });
+  }
+
   return (
     <div
       style={{
@@ -61,7 +56,40 @@ export default function Home() {
         style={{ width: "150px", height: "150px", marginBottom: "20px" }}
       />
       <h2>Login</h2>
-      <form onSubmit={handleLogin} style={{ textAlign: "center" }}>
+      <TextField
+              autoFocus
+              margin="dense"
+              id="email"
+              label="Email Address"
+              type="email"
+              fullWidth
+              value={formValues.email}
+              onChange={(e) =>
+                handleChange({ field: "email", value: e.target.value })
+              }
+              variant="standard"
+            />
+      <TextField
+              margin="dense"
+              id="password"
+              label="Password"
+              type="password"
+              fullWidth
+              value={formValues.password}
+              onChange={(e) =>
+                handleChange({ field: "password", value: e.target.value })
+              }
+              variant="standard"
+            />
+      <Button onClick={() => handleSignin()}>Login</Button>
+      <div style={{ marginTop: "20px" }}>
+        <p>
+          Don't have an account? <Link href="/signup"> Sign-Up</Link>
+        </p>
+      </div>
+
+
+      {/* <form onSubmit={handleLogin} style={{ textAlign: "center" }}>
         <label htmlFor="email">Email:</label>
         <input
           type="text"
@@ -89,7 +117,7 @@ export default function Home() {
         <p>
           Don't have an account? <Link href="/signup"> Sign-Up</Link>
         </p>
-      </div>
+      </div> */}
     </div>
   );
 }
