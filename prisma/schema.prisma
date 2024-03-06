@@ -17,9 +17,9 @@ model User {
   password String 
   firstName String
   lastName String
-  gender String
-  cpVerified Int
-  dlVerified Int
+  gender String?
+  cpVerified Int?
+  dlVerified Int?
   sentMessages Message[] @relation("Sender")
   recievedMessages Message[] @relation("Recipient")
   ridesGiven Ride[] @relation("Driver")
