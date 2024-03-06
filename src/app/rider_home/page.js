@@ -80,8 +80,8 @@ export default function Home() {
         </Button>
 
         <Button
-          //component={Link}
-          //href="/driver_home/message"
+          component={Link}
+          href="/rider_home/message"
           sx={{
             fontWeight: 700,
             width: "200px",
@@ -104,8 +104,8 @@ export default function Home() {
         </Button>
 
         <Button
-          //component={Link}
-          //href="/driver_home/profile"
+          component={Link}
+          href="/rider_home/profile"
           sx={{
             fontWeight: 700,
             width: "200px",
@@ -127,16 +127,6 @@ export default function Home() {
           Profile
         </Button>
       </Box>
-      {/* Image */}
-      {/* <Box
-        sx={{
-          width: "700px", // Set desired width
-          height: "700px", // Set desired height
-          marginBottom: "20px", // Add margin to the bottom
-        }}
-      >
-        <Image src={myImage} alt="Image Description" layout="responsive" />
-      </Box> */}
       <MyMap />
     </Box>
   );
