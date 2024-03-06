@@ -23,11 +23,14 @@ export default function RootLayout({ children, title }) {
   const { data: session, status } = useSession();
 
   let loginSection;
-  loginSection = (
+  if (status == "authenticated"){
+      loginSection = (
     <>
       <Logout />
     </>
   );
+  };
+
   // if (status === "authenticated") {
   //   loginSection = (
   //     <Button variant="outlined" color="inherit" onClick={() => signOut()}>

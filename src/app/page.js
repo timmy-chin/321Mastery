@@ -6,6 +6,7 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import { useRouter } from 'next/navigation'
 
 
 function handleLogin(event){
@@ -19,6 +20,7 @@ function handleLogin(event){
 export default function Login() {
   const [formValues, setFormValues] = useState({ email: "", password: "" });
   const [error, setError] = useState(false);
+  const router = useRouter()
 
   function reset() {
     setError(false);
@@ -28,6 +30,7 @@ export default function Login() {
   function handleSignin() {
     signIn("normal", { ...formValues, redirect: false }).then((result) => {
       if (!result.error) {
+        router.push('/driver_home')
         reset();
       } else {
         setError(true);
