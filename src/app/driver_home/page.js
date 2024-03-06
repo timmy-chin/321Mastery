@@ -17,6 +17,9 @@ export default function Home() {
       }}
     >
       <h1>Welcome Driver!</h1>
+      <h3>
+        <Link href="/rider_home">Switch to Rider Mode!</Link>
+      </h3>
       <p>
         This is the driver homepage! Click on an option to continue or logout!
       </p>
