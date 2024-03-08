@@ -25,6 +25,10 @@ const ProfilePage = () => {
     getData(); // Fetch data when the component mounts
   }, []); // Empty dependency array ensures useEffect runs only once on mount
 
+  if (!userData) {
+    return <div></div>;
+  }
+
   return (
     <div
       style={{
@@ -35,7 +39,7 @@ const ProfilePage = () => {
       }}
     >
       <div style={{ maxWidth: "600px", margin: "0 auto" }}>
-        <h1 style={{ textAlign: "center", marginBottom: "20px" }}>Profile</h1>
+        <h1 style={{ textAlign: "center", marginBottom: "20px" }}>Driver Profile</h1>
         <div
           style={{
             display: "flex",
