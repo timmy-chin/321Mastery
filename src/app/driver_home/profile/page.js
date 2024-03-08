@@ -1,6 +1,30 @@
+"use client";
+
 import React from "react";
+import { useState, useEffect } from "react"
 
 const ProfilePage = () => {
+  const [userData, setUserData] = useState(null); // State to store fetched user data
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const res = await fetch("/api/profile", { method: "get" });
+        console.log(res.ok)
+        if (!res.ok) {
+          throw new Error('Failed to fetch data here');
+        }
+        const data = await res.json();
+        setUserData(data); // Update state with fetched data
+      } catch (error) {
+        console.error('Error fetching data:', error.message);
+        // Handle error as needed (e.g., show an error message to the user)
+      }
+    };
+
+    getData(); // Fetch data when the component mounts
+  }, []); // Empty dependency array ensures useEffect runs only once on mount
+
   return (
     <div
       style={{
@@ -31,10 +55,9 @@ const ProfilePage = () => {
             }}
           />
           <div>
-            <h2 style={{ marginBottom: "10px" }}>Peter Almeida</h2>
-            <p>Email: peterluvsjaime@example.com</p>
-            <p>Location: New York City</p>
-            <p>Phone number: 8188188181</p>
+            <h2 style={{ marginBottom: "10px" }}>{`${userData?.firstName} ${userData?.lastName}`}</h2>
+            <p>Email: {userData?.email}</p>
+            <p>More data coming soon...</p>
             {/* Add more profile information here */}
           </div>
         </div>
