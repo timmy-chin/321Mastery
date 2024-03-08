@@ -36,6 +36,12 @@ Install Google Maps React
 npm i -S @react-google-maps/api
 ```
 
+Install Icons
+
+```bash
+npm install react-icons --save
+```
+
 Finally, run the development server:
 
 ```bash
