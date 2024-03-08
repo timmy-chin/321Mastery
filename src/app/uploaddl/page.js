@@ -6,7 +6,6 @@ export default function UploadLicense() {
 
   const handleUpload = (event) => {
     const imageFile = event.target.files[0];
-    // Perform any additional logic such as validation or processing
     setLicenseImage(URL.createObjectURL(imageFile));
   };
 
@@ -18,7 +17,7 @@ export default function UploadLicense() {
         alignItems: "center",
         justifyContent: "center",
         height: "100vh",
-        color: "black", // Change text color to black
+        color: "black",
       }}
     >
       <h1>Upload Driver's License</h1>
