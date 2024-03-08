@@ -1,4 +1,0 @@
--- AlterTable
-ALTER TABLE "User" ALTER COLUMN "gender" DROP NOT NULL,
-ALTER COLUMN "cpVerified" DROP NOT NULL,
-ALTER COLUMN "dlVerified" DROP NOT NULL;

@@ -23,13 +23,13 @@ export default function RootLayout({ children, title }) {
   const { data: session, status } = useSession();
 
   let loginSection;
-  if (status == "authenticated"){
-      loginSection = (
-    <>
-      <Logout/>
-    </>
-  );
-  };
+  if (status == "authenticated") {
+    loginSection = (
+      <>
+        <Logout />
+      </>
+    );
+  }
   // if (status === "authenticated") {
   //   loginSection = (
   //     <Button variant="outlined" color="inherit" onClick={() => signOut()}>
@@ -72,7 +72,7 @@ export default function RootLayout({ children, title }) {
               <NavBar />
               <Box sx={{ flexGrow: 0 }}>
                 <Stack direction="row" spacing={2}>
-                  {/* {loginSection} */}
+                  <loginSection />
                 </Stack>
               </Box>
             </Toolbar>

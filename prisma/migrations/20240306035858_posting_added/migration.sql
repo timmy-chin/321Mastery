@@ -5,9 +5,9 @@ CREATE TABLE "User" (
     "password" TEXT NOT NULL,
     "firstName" TEXT NOT NULL,
     "lastName" TEXT NOT NULL,
-    "gender" TEXT NOT NULL,
-    -- "cpVerified" BOOLEAN NOT NULL,
-    -- "dlVerified" BOOLEAN NOT NULL,
+    "gender" TEXT,
+    "cpVerified" INTEGER,
+    "dlVerified" INTEGER,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -42,14 +42,30 @@ CREATE TABLE "Ride" (
     "id" SERIAL NOT NULL,
     "startLoc" TEXT NOT NULL,
     "endLoc" TEXT NOT NULL,
-    "stops" TEXT NOT NULL,
-    "request" BOOLEAN NOT NULL,
-    "arriveTime" TIMESTAMP(3) NOT NULL,
-    "startTime" TIMESTAMP(3) NOT NULL,
+    "stops" TEXT,
+    "request" TEXT NOT NULL,
+    "date" TEXT NOT NULL,
+    "time" TEXT NOT NULL,
     "numStops" INTEGER NOT NULL,
     "driverId" INTEGER NOT NULL,
+    "seats" TEXT NOT NULL,
+    "price" TEXT NOT NULL,
 
     CONSTRAINT "Ride_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Posting" (
+    "id" SERIAL NOT NULL,
+    "startLoc" TEXT NOT NULL,
+    "endLoc" TEXT NOT NULL,
+    "date" TEXT NOT NULL,
+    "time" TEXT NOT NULL,
+    "driverId" INTEGER NOT NULL,
+    "seats" TEXT NOT NULL,
+    "price" TEXT NOT NULL,
+
+    CONSTRAINT "Posting_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex

@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 import Link from "next/link";
 import { Button } from "@mui/material";
 import MyMap from "./map";
+import Logout from "../Logout";
 
 export default function Home() {
   return (
@@ -17,9 +18,30 @@ export default function Home() {
       }}
     >
       <h1>Welcome Rider!</h1>
-      <h3>
-        <Link href="/driver_home">Switch to Driver Mode!</Link>
-      </h3>
+      <Button
+        component={Link}
+        href="/driver_home"
+        sx={{
+          fontWeight: 700,
+          width: "250px",
+          height: "50px",
+          backgroundColor: "white",
+          color: "black",
+          border: "2px solid black",
+          borderRadius: "8px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          cursor: "pointer",
+          "&:hover": {
+            backgroundColor: "black",
+            color: "white",
+          },
+        }}
+      >
+        Switch to Driver Mode!
+      </Button>
+      <Logout />
       <p>
         This is the rider homepage! Click on an option to continue or logout!
       </p>
