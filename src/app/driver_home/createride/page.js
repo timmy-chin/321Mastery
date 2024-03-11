@@ -11,6 +11,8 @@ export default function Home() {
   const [time, setTime] = useState('');
   const [seats, setSeats] = useState('');
   const [price, setPrice] = useState('');
+  const [name, setName] = useState('');
+  const [posted, setPosted] = useState(false)
 
   function startLocChanged(event) {
     setStartLoc(event.target.value);
@@ -38,9 +40,22 @@ export default function Home() {
 
   function postRide() {
     if(startLoc && startLoc.length && endLoc && endLoc.length && date && date.length && time && time.length) {
-        fetch("/api/rideposting", { method: "post", body: JSON.stringify({startLoc: startLoc, endLoc: endLoc, date: date, time: time, seats: seats, price: price}) });
+        fetch("/api/rideposting", { method: "post", body: JSON.stringify({startLoc: startLoc, endLoc: endLoc, date: date, time: time, seats: seats, price: price, driverName: name}) });
+        setPosted(true);
     }
   }
+
+  // Get username of the driver making the post
+  fetch("/api/getProfile?userid=getID", { method: "get" }).then((response) => response.ok && response.json()).then(
+    Id => {
+        fetch("/api/getProfile?userid="+Id, { method: "get" }).then((response) => response.ok && response.json()).then(
+          profiles => {
+              const profile = profiles[0];
+              setName(profile.firstName + " " + profile.lastName)
+          }
+        );
+    }
+  );
   
   return (
     <>
@@ -115,6 +130,7 @@ export default function Home() {
       <p></p>
 
       <button type="button" onClick={postRide}>Post Ride</button>
+      <a>{posted ? " Posted!" : ""}</a>
 
     </>
   )

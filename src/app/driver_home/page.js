@@ -101,7 +101,7 @@ export default function Home() {
             },
           }}
         >
-          Active Rides
+          My Rides
         </Button>
 
         <Button

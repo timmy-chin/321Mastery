@@ -74,4 +74,23 @@ model Posting {
   driverId Int
   seats String
   price String
+  driverName String
+}
+
+model RiderRequest {
+  id Int @id @default(autoincrement())
+  postId Int
+  riderId Int
+}
+
+model Accepted {
+  id Int @id @default(autoincrement())
+  postId Int
+  riderId Int
+}
+
+model Declined {
+  id Int @id @default(autoincrement())
+  postId Int
+  riderId Int
 }
