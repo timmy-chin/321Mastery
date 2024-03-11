@@ -64,7 +64,6 @@ function Home() {
     );
   }, []);   
 
-  console.log("This is requested: "+ requested)
 
   const listAllPost = posting.map((post, index) => (
     <div>
