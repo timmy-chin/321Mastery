@@ -9,38 +9,50 @@ export async function GET(request) {
   const endLoc = searchParams.get('endLoc');
   const date = searchParams.get('date');
   const time = searchParams.get('time');
+  const userId = searchParams.get('userId');
 
-  if (!startLoc && !endLoc && !date && !time){
-    const allPost = await prisma.Posting.findMany({
+  if (userId != null){
+    const driverPost = await prisma.Posting.findMany({
       where: {
         driverId: {
           equals: loggedInData.user?.id
         }
       }
     });
+    return NextResponse.json(driverPost);
+  }
+
+  if ((startLoc == null || startLoc.length == 0) && (endLoc == null || endLoc.length == 0) && (date == null || date.length == 0) && (time == null || time.length == 0)){
+    const allPost = await prisma.Posting.findMany({
+      where: {
+      }
+    });
     return NextResponse.json(allPost);
   }
+
+
+
   const post = await prisma.Posting.findMany({
     where: {
       OR: [
     {
       startLoc: {
-        equals: startLoc
+        equals: startLoc != null ? startLoc : " "
       },
     },
     {
       endLoc: {
-        equals: endLoc
+        equals: endLoc != null ? endLoc : " "
       },
     },
     {
       time: {
-        equals: time
+        equals: time != null ? time : " "
       },
     },
     {
       date: {
-        equals: date
+        equals: date != null ? date : " "
       }
     }]
 
@@ -53,7 +65,7 @@ export async function GET(request) {
 export async function POST(request) {
   const loggedInData = await checkLoggedIn();
   if (loggedInData.loggedIn) {
-    const { startLoc, endLoc, date, time, seats, price } = await request.json();
+    const { startLoc, endLoc, date, time, seats, price, driverName } = await request.json();
     const post = await prisma.Posting.create({
       data: {
         driverId: loggedInData.user?.id,
@@ -62,7 +74,8 @@ export async function POST(request) {
         date: date,
         time: time,
         seats: seats,
-        price: price
+        price: price,
+        driverName: driverName
       }
     });
     return NextResponse.json(post);

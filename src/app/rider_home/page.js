@@ -36,7 +36,7 @@ export default function Home() {
 
         <Button
           component={Link}
-          href="/findride"
+          href="/rider_home/findride"
           sx={{
             fontWeight: 700,
             width: "200px",
@@ -59,8 +59,7 @@ export default function Home() {
         </Button>
 
         <Button
-          //component={Link}
-          //href="/driver_home/active"
+          href="/rider_home/active"
           sx={{
             fontWeight: 700,
             width: "200px",
@@ -79,7 +78,7 @@ export default function Home() {
             },
           }}
         >
-          Active Rides
+          Requested Rides
         </Button>
 
         <Button
