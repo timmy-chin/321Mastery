@@ -64,6 +64,7 @@ CREATE TABLE "Posting" (
     "driverId" INTEGER NOT NULL,
     "seats" TEXT NOT NULL,
     "price" TEXT NOT NULL,
+    "driverName" TEXT NOT NULL,
 
     CONSTRAINT "Posting_pkey" PRIMARY KEY ("id")
 );
