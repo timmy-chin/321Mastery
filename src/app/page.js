@@ -37,20 +37,28 @@ export default function Login() {
     <div
       style={{
         display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
+        flexDirection: "row",
         height: "100vh",
       }}
     >
-      <h1>Carpool With Me</h1>
-      <img
-        src="/carpoologo.png"
-        alt="Carpool Logo"
-        style={{ width: "150px", height: "150px", marginBottom: "20px" }}
-      />
-      <h2>Login</h2>
-      <TextField
+      <div
+        style={{
+          flex: "1",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "left",
+          justifyContent: "center",
+          padding: "0 20px", 
+          paddingLeft: "80px",
+          
+
+        }}
+      >
+      <h1 style={{ fontFamily: "Avenir, sans-serif", fontSize: "38px" }}>Carpool With Me</h1>
+      {/* <h1>Carpool With Me</h1> */}
+      
+      <h3 style={{ fontFamily: "Avenir, sans-serif"}}>Login</h3>
+      {/* <TextField
               autoFocus
               margin="dense"
               id="email"
@@ -62,8 +70,51 @@ export default function Login() {
                 handleChange({ field: "email", value: e.target.value })
               }
               variant="standard"
-            />
-      <TextField
+            /> */}
+
+      <form>
+        <input
+          type="text"
+          name="email"
+          placeholder="Email Address"
+          style={{
+            width: '300px',
+            boxSizing: 'border-box',
+            border: '2px solid #000',
+            borderRadius: '4px',
+            fontSize: '16px',
+            color: '#000',
+            backgroundColor: 'white',
+            padding: '12px 20px 12px 12px',
+            marginBottom: '20px', 
+          }}
+          value={formValues.email}
+          onChange={(e) => handleChange({field: 'email', value: e.target.value})}
+        />
+      </form>
+      
+      <form>
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          style={{
+            width: '300px',
+            boxSizing: 'border-box',
+            border: '2px solid #000',
+            borderRadius: '4px',
+            fontSize: '16px',
+            color: '#000',
+            backgroundColor: 'white',
+            padding: '12px 20px 12px 12px',
+            marginBottom: '-40px', 
+          }}
+          value={formValues.password}
+          onChange={(e) => handleChange({ field: "password", value: e.target.value })}
+        />
+      </form>
+      
+      {/* <TextField
               margin="dense"
               id="password"
               label="Password"
@@ -74,12 +125,24 @@ export default function Login() {
                 handleChange({ field: "password", value: e.target.value })
               }
               variant="standard"
-            />
-      <Button onClick={() => handleSignin()}>Login</Button>
-      <div style={{ marginTop: "20px" }}>
+            /> */}
+      
+      <div style={{ marginTop: "5px", width: "300px", textAlign: "center"}}>
         <p>
           Don't have an account? <Link href="/signup"> Sign-Up</Link>
         </p>
+      </div>
+      <Button
+        onClick={() => handleSignin()}
+        style={{
+          width: '300px',
+          marginTop: "20px",
+          border: '2px solid #000', // Black border
+          backgroundColor: '#000', // Solid black background color
+          color: '#fff', // Text color (white)
+          justifyContent: 'center',
+        }}
+      >Login</Button>
       </div>
 
 
@@ -112,6 +175,20 @@ export default function Login() {
           Don't have an account? <Link href="/signup"> Sign-Up</Link>
         </p>
       </div> */}
+
+      <div
+        style={{
+          flex: "1",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          overflow: "hidden",
+          paddingRight: "100px",
+        }}
+      >
+        
+        <Image src="/loginImage.png" width={800} height={1000} />
+      </div>
     </div>
   );
 }
