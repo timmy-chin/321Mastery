@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { useState, useEffect } from "react"
+import { SlArrowLeftCircle } from "react-icons/sl";
+import { useState, useEffect } from "react";
 
 const ProfilePage = () => {
   const [userData, setUserData] = useState(null); // State to store fetched user data
@@ -10,14 +11,14 @@ const ProfilePage = () => {
     const getData = async () => {
       try {
         const res = await fetch("/api/profile", { method: "get" });
-        console.log(res.ok)
+        console.log(res.ok);
         if (!res.ok) {
-          throw new Error('Failed to fetch data here');
+          throw new Error("Failed to fetch data here");
         }
         const data = await res.json();
         setUserData(data); // Update state with fetched data
       } catch (error) {
-        console.error('Error fetching data:', error.message);
+        console.error("Error fetching data:", error.message);
         // Handle error as needed (e.g., show an error message to the user)
       }
     };
@@ -38,8 +39,15 @@ const ProfilePage = () => {
         padding: "20px",
       }}
     >
+      <a href="/rider_home">
+        <SlArrowLeftCircle size={32} />
+      </a>
+      <br />
+      <strong>Back to Rider Home!</strong>
       <div style={{ maxWidth: "600px", margin: "0 auto" }}>
-        <h1 style={{ textAlign: "center", marginBottom: "20px" }}>Rider Profile</h1>
+        <h1 style={{ textAlign: "center", marginBottom: "20px" }}>
+          Rider Profile
+        </h1>
         <div
           style={{
             display: "flex",
@@ -59,7 +67,9 @@ const ProfilePage = () => {
             }}
           />
           <div>
-            <h2 style={{ marginBottom: "10px" }}>{`${userData?.firstName} ${userData?.lastName}`}</h2>
+            <h2
+              style={{ marginBottom: "10px" }}
+            >{`${userData?.firstName} ${userData?.lastName}`}</h2>
             <p>Email: {userData?.email}</p>
             <p>More data coming soon...</p>
             {/* Add more profile information here */}

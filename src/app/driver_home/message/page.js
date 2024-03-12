@@ -1,4 +1,5 @@
 import React from "react";
+import { SlArrowLeftCircle } from "react-icons/sl";
 
 const MessagingPage = () => {
   return (
@@ -10,6 +11,11 @@ const MessagingPage = () => {
         padding: "20px",
       }}
     >
+      <a href="/driver_home">
+        <SlArrowLeftCircle size={32} />
+      </a>
+      <br />
+      <strong>Back to Driver Home!</strong>
       <div style={{ maxWidth: "600px", margin: "0 auto" }}>
         <h1 style={{ textAlign: "center", marginBottom: "20px" }}>Messaging</h1>
         <div

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { checkLoggedIn } from "@/lib/auth";
-
+import { SlArrowLeftCircle } from "react-icons/sl";
 
 function Home() {
   const [location, setLocation] = useState("");
@@ -37,51 +37,69 @@ function Home() {
   }
 
   function searchHandler() {
-    const url = "/api/rideposting?" + "startLoc=" + location + "&endLoc=" + destination + "&date=" + date + "&time=" + time;
-    console.log("this is url: " + url)
-    fetch(url, { method: "get" }).then((response) => response.ok && response.json()).then(
-      post => {
-          post && setPosting(post);
-      }
-    );
+    const url =
+      "/api/rideposting?" +
+      "startLoc=" +
+      location +
+      "&endLoc=" +
+      destination +
+      "&date=" +
+      date +
+      "&time=" +
+      time;
+    console.log("this is url: " + url);
+    fetch(url, { method: "get" })
+      .then((response) => response.ok && response.json())
+      .then((post) => {
+        post && setPosting(post);
+      });
   }
 
   function requestRideHandler(event) {
     const postIdx = event.target.value;
     posting.map((post, index) => {
-        if (index == parseInt(postIdx)){
-          fetch("/api/request", { method: "post", body: JSON.stringify({postId: post.id})});
-        }
+      if (index == parseInt(postIdx)) {
+        fetch("/api/request", {
+          method: "post",
+          body: JSON.stringify({ postId: post.id }),
+        });
+      }
     });
   }
 
   // Get all posting when first load
   useEffect(() => {
-    fetch("/api/rideposting", { method: "get" }).then((response) => response.ok && response.json()).then(
-        post => {
-            post && setPosting(post);
-        }
-    );
-  }, []);   
-
+    fetch("/api/rideposting", { method: "get" })
+      .then((response) => response.ok && response.json())
+      .then((post) => {
+        post && setPosting(post);
+      });
+  }, []);
 
   const listAllPost = posting.map((post, index) => (
     <div>
-          <img src={pfpList[0]} width="100" height="100"></img>
-          <h3 key={index}>Driver Name: {post.driverName}</h3>
-          <h5 key={index}>Pick Up Location: {post.startLoc}</h5>
-          <h5 key={index}>Destination: {post.endLoc}</h5>
-          <h5 key={index}>Date: {post.date}</h5>
-          <h5 key={index}>Time: {post.time}</h5>
-          <h5 key={index}>Seats: {post.seats}</h5>
-          <h5 key={index}>Price: {post.price}</h5>
-          <button value={index} onClick={requestRideHandler}>Request Ride</button>
-          <p> </p>
+      <img src={pfpList[0]} width="100" height="100"></img>
+      <h3 key={index}>Driver Name: {post.driverName}</h3>
+      <h5 key={index}>Pick Up Location: {post.startLoc}</h5>
+      <h5 key={index}>Destination: {post.endLoc}</h5>
+      <h5 key={index}>Date: {post.date}</h5>
+      <h5 key={index}>Time: {post.time}</h5>
+      <h5 key={index}>Seats: {post.seats}</h5>
+      <h5 key={index}>Price: {post.price}</h5>
+      <button value={index} onClick={requestRideHandler}>
+        Request Ride
+      </button>
+      <p> </p>
     </div>
   ));
 
   return (
     <div>
+      <a href="/rider_home">
+        <SlArrowLeftCircle size={32} />
+      </a>
+      <br />
+      <strong>Back to Rider Home!</strong>
       <h1>Search Drivers</h1>
 
       <h4>Pick Up Location</h4>
