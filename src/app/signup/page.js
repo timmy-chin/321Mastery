@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Button from "@mui/material/Button";
 
 export default function Home() {
   const router = useRouter();
@@ -141,7 +142,7 @@ export default function Home() {
             Have have an account? <Link href="/"> Log-In</Link>
           </p>
         </div>
-          <button type="submit"
+          <Button type="submit"
           style={{
             width: '300px',
             marginTop: "20px",
@@ -150,7 +151,7 @@ export default function Home() {
             color: '#fff', // Text color (white)
             justifyContent: 'center',
           }}
-          >Sign-Up</button>
+          >Sign-Up</Button>
         </form>
 
         
