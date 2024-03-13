@@ -1,0 +1,47 @@
+/* Messages.module.css */
+.messagingCenter {
+    padding: 20px;
+    max-width: 600px;
+    margin: auto;
+  }
+  
+  .header {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .messageList {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .messagePreview {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .messagePreview:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .profilePic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+  }
+  
+  .messageInfo {
+    flex-grow: 1;
+  }
+  
+  .sentDate {
+    white-space: nowrap;
+  }
+  

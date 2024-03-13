@@ -1,0 +1,60 @@
+/* Assuming this is at src/styles/Conversation.module.css */
+.conversation {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  .messages {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  .myMessage {
+    align-self: flex-end;
+    background-color: solid #bdd4e0; /* Replace with your color */
+  }
+  
+  .theirMessage {
+    align-self: flex-start;
+    background-color: solid #a5abae; /* Replace with your color */
+  }
+  
+  .messageContent {
+    margin: 5px;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 80%;
+    word-wrap: break-word;
+  }
+  
+  .messageTimestamp {
+    font-size: 0.75rem;
+    text-align: right;
+  }
+  
+  .inputForm {
+    display: flex;
+    padding: 10px;
+  }
+  
+  .input {
+    flex: 1;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .sendButton {
+    padding: 10px 20px;
+    background-color: solid #76c4ee; /* Replace with your color */
+    color: #ccc;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
