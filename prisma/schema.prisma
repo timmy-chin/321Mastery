@@ -107,3 +107,10 @@ model Declined {
   postId Int
   riderId Int
 }
+
+model DriveStatus {
+  id Int @id @default(autoincrement())
+  postId Int
+  status String
+  riderIds String
+}
