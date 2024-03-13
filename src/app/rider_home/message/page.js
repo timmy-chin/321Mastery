@@ -1,114 +1,88 @@
-import React from "react";
-import { SlArrowLeftCircle } from "react-icons/sl";
 
-const MessagingPage = () => {
+// front end page.js
+"use client";
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import styles from '../../../../styles/Message.module.css';
+
+export default function Messages() {
+  const [conversations, setConversations] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [newMessage, setNewMessage] = useState('');
+  const [recipientId, setRecipientId] = useState('');
+
+  useEffect(() => {
+    setLoading(true);
+    fetch('/api/messages')
+      .then(res => res.json())
+      .then(data => {
+        setConversations(data);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error("Failed to load conversations:", error);
+        setError(error);
+        setLoading(false);
+      });
+  }, []);
+
+  const sendMessage = async () => {
+    if (!newMessage.trim() || !recipientId.trim()) return;
+    try {
+      const response = await fetch('/api/messages/new', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content: newMessage, recipientId }),
+      });
+      if (response.ok) {
+        setNewMessage('');
+        // Optionally, refresh conversations or handle UI update
+      } else {
+        console.error("Failed to send message.");
+      }
+    } catch (error) {
+      console.error("Failed to send message:", error);
+    }
+  };
+
   return (
-    <div
-      style={{
-        backgroundColor: "white",
-        color: "black",
-        minHeight: "100vh",
-        padding: "20px",
-      }}
-    >
-      <a href="/rider_home">
-        <SlArrowLeftCircle size={32} />
-      </a>
-      <br />
-      <strong>Back to Rider Home!</strong>
-      <div style={{ maxWidth: "600px", margin: "0 auto" }}>
-        <h1 style={{ textAlign: "center", marginBottom: "20px" }}>Messaging</h1>
-        <div
-          style={{
-            padding: "10px",
-            border: "1px solid black",
-            borderRadius: "5px",
-            marginBottom: "20px",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              marginBottom: "10px",
-            }}
-          >
-            <img
-              src="/carpoologo.png"
-              alt="User Avatar"
-              style={{
-                width: "50px",
-                height: "50px",
-                borderRadius: "50%",
-                marginRight: "10px",
-                border: "2px solid black",
-              }}
-            />
-            <strong>Jaime Nguyen:</strong>
-          </div>
-          <p style={{ marginBottom: "10px" }}>On the way!</p>
-        </div>
-        <div
-          style={{
-            padding: "10px",
-            border: "1px solid black",
-            borderRadius: "5px",
-            marginBottom: "20px",
-            textAlign: "right",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-end",
-              marginBottom: "10px",
-            }}
-          >
-            <strong>Peter Almeida:</strong>
-            <img
-              src="/carpoologo.png"
-              alt="User Avatar"
-              style={{
-                width: "50px",
-                height: "50px",
-                borderRadius: "50%",
-                marginLeft: "10px",
-                border: "2px solid black",
-              }}
-            />
-          </div>
-          <p style={{ marginBottom: "10px" }}>Sounds good!</p>
-        </div>
-        <form style={{ display: "flex", marginBottom: "20px" }}>
-          <input
-            type="text"
-            placeholder="Type your message..."
-            style={{
-              flex: "1",
-              padding: "8px",
-              marginRight: "10px",
-              border: "1px solid black",
-              borderRadius: "5px",
-            }}
-          />
-          <button
-            type="submit"
-            style={{
-              backgroundColor: "black",
-              color: "white",
-              border: "none",
-              padding: "8px 15px",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
-          >
-            Send
-          </button>
-        </form>
+    <div className={styles.messagingCenter}>
+      <h1 className={styles.header}>Messaging Center</h1>
+      <div className={styles.newMessageForm}>
+        <input 
+          type="text" 
+          placeholder="Recipient ID" 
+          value={recipientId} 
+          onChange={(e) => setRecipientId(e.target.value)} 
+        />
+        <textarea 
+          placeholder="New message..." 
+          value={newMessage} 
+          onChange={(e) => setNewMessage(e.target.value)}
+        ></textarea>
+        <button onClick={sendMessage}>Send New Message</button>
+      </div>
+      <div className={styles.messageList}>
+        {conversations.map((conversation) => (
+          <Link key={conversation.id} href={`/app/${conversation.id}`} passHref>
+            <div className={styles.messagePreview}>
+              <img src="/profile-pic-placeholder.png" alt="Profile" className={styles.profilePic} />
+              {conversation.messages.map((message) => (
+                <div key={message.id}>
+                  <div className={styles.messageInfo}>
+                    {/* Adjusted to display recipient information */}
+                    <strong>{message.sender.firstName} {message.sender.lastName}</strong>
+                    <p>{message.content.substring(0, 50)}{message.content.length > 50 ? '...' : ''}</p>
+                  </div>
+                  <span className={styles.sentDate}>{new Date(message.time).toLocaleString()}</span>
+                </div>
+              ))}
+            </div>
+          </Link>
+        ))}
       </div>
     </div>
   );
-};
+}
 
-export default MessagingPage;
