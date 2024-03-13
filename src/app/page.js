@@ -55,22 +55,9 @@ export default function Login() {
         }}
       >
       <h1 style={{ fontFamily: "Avenir, sans-serif", fontSize: "38px" }}>Carpool With Me</h1>
-      {/* <h1>Carpool With Me</h1> */}
       
       <h3 style={{ fontFamily: "Avenir, sans-serif"}}>Login</h3>
-      {/* <TextField
-              autoFocus
-              margin="dense"
-              id="email"
-              label="Email Address"
-              type="email"
-              fullWidth
-              value={formValues.email}
-              onChange={(e) =>
-                handleChange({ field: "email", value: e.target.value })
-              }
-              variant="standard"
-            /> */}
+    
 
       <form>
         <input
@@ -113,19 +100,7 @@ export default function Login() {
           onChange={(e) => handleChange({ field: "password", value: e.target.value })}
         />
       </form>
-      
-      {/* <TextField
-              margin="dense"
-              id="password"
-              label="Password"
-              type="password"
-              fullWidth
-              value={formValues.password}
-              onChange={(e) =>
-                handleChange({ field: "password", value: e.target.value })
-              }
-              variant="standard"
-            /> */}
+    
       
       <div style={{ marginTop: "5px", width: "300px", textAlign: "center"}}>
         <p>
@@ -144,37 +119,6 @@ export default function Login() {
         }}
       >Login</Button>
       </div>
-
-
-      {/* <form onSubmit={handleLogin} style={{ textAlign: "center" }}>
-        <label htmlFor="email">Email:</label>
-        <input
-          type="text"
-          id="email"
-          name="email"
-          placeholder="Enter your email"
-          required
-        />
-        <br />
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Enter your password"
-          required
-        />
-        <br />
-        <button type="submit">
-          {" "}
-          <Link href="/driver_home">Login</Link>
-        </button>
-      </form>
-      <div style={{ marginTop: "20px" }}>
-        <p>
-          Don't have an account? <Link href="/signup"> Sign-Up</Link>
-        </p>
-      </div> */}
 
       <div
         style={{

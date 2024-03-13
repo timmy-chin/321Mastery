@@ -1,4 +1,6 @@
 "use client";
+import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
@@ -40,7 +42,7 @@ export default function Home() {
             type="text"
             id="email"
             name="email"
-            placeholder="Enter your email"
+            placeholder="Email"
             required
             style={{
               width: '300px',
@@ -60,7 +62,26 @@ export default function Home() {
             type="password"
             id="password"
             name="password"
-            placeholder="Enter your password"
+            placeholder="Password"
+            required
+            style={{
+              width: '300px',
+              boxSizing: 'border-box',
+              border: '2px solid #000',
+              borderRadius: '4px',
+              fontSize: '16px',
+              color: '#000',
+              backgroundColor: 'white',
+              padding: '12px 20px 12px 12px',
+              marginBottom: '20px', 
+            }}
+          />
+          <br />
+          <input
+            type="password"
+            id="confirmation"
+            name="confirmation"
+            placeholder="Confirm Password"
             required
             style={{
               width: '300px',
@@ -80,7 +101,7 @@ export default function Home() {
             type="text"
             id="firstname"
             name="firstname"
-            placeholder="Enter your First Name"
+            placeholder="First Name"
             required
             style={{
               width: '300px',
@@ -94,13 +115,12 @@ export default function Home() {
               marginBottom: '20px', 
             }}
           />
-          <br />
           {/* <label htmlFor="lastname">Enter your Last Name:</label> */}
           <input
             type="text"
             id="lastname"
             name="lastname"
-            placeholder="Enter your Last Name"
+            placeholder="Last Name"
             required
             style={{
               width: '300px',
@@ -111,35 +131,29 @@ export default function Home() {
               color: '#000',
               backgroundColor: 'white',
               padding: '12px 20px 12px 12px',
-              marginBottom: '20px', 
+              marginBottom: '0px', 
             }}
           />
           <br />
-          {/* <label htmlFor="confirmation">Confirm Password:</label> */}
-          <input
-            type="password"
-            id="confirmation"
-            name="confirmation"
-            placeholder="Enter your password again"
-            required
-            style={{
-              width: '300px',
-              boxSizing: 'border-box',
-              border: '2px solid #000',
-              borderRadius: '4px',
-              fontSize: '16px',
-              color: '#000',
-              backgroundColor: 'white',
-              padding: '12px 20px 12px 12px',
-              marginBottom: '20px', 
-            }}
-          />
-          <br />
-          <button type="submit">Sign-Up</button>
+          
+        <div style={{ marginTop: "0px", width: "300px", textAlign: "center"}}>
+          <p>
+            Have have an account? <Link href="/"> Log-In</Link>
+          </p>
+        </div>
+          <button type="submit"
+          style={{
+            width: '300px',
+            marginTop: "20px",
+            border: '2px solid #000', // Black border
+            backgroundColor: '#000', // Solid black background color
+            color: '#fff', // Text color (white)
+            justifyContent: 'center',
+          }}
+          >Sign-Up</button>
         </form>
-        <button type="button" onClick={() => router.push("/")}>
-          Go Back to Login
-        </button>
+
+        
       </div>
       <div
         style={{
@@ -148,11 +162,11 @@ export default function Home() {
           alignItems: "center",
           justifyContent: "center",
           overflow: "hidden",
-          paddingRight: "100px",
+          paddingRight: "110px",
         }}
       >
         
-        <Image src="/loginImage.png" width={800} height={1000} />
+        <Image src="/image2307.png" width={800} height={1000} />
       </div>
     </div>
   );
