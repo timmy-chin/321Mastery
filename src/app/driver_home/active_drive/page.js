@@ -14,53 +14,6 @@ export default function Page() {
   const [ended, setEnded] = useState([]);
 
 
-
-  function acceptedHandler(event) {
-    const payload = event.target.value;
-    const payloadValue = payload.split(":");
-    const postId = parseInt(payloadValue[0]);
-    const riderId = parseInt(payloadValue[1]);
-    fetch("/api/accepted", {
-      method: "post",
-      body: JSON.stringify({ postId: postId, riderId: riderId }),
-    });
-  }
-
-  function declinedHandler(event) {
-    const payload = event.target.value;
-    const payloadValue = payload.split(":");
-    const postId = parseInt(payloadValue[0]);
-    const riderId = parseInt(payloadValue[1]);
-    fetch("/api/declined", {
-      method: "post",
-      body: JSON.stringify({ postId: postId, riderId: riderId }),
-    });
-  }
-
-  function startRideHandler(event) {
-    const payload = event.target.value;
-    const payloadValue = payload.split(":");
-    const postId = parseInt(payloadValue[0]);
-    const index = parseInt(payloadValue[1]);
-    const rideIds = riderIds[index].join(":");
-    fetch("/api/driveStatus", {
-      method: "post",
-      body: JSON.stringify({ postId: postId, status: "start", riderIds: rideIds }),
-    });
-  }
-
-  function endRideHandler(event) {
-    const payload = event.target.value;
-    const payloadValue = payload.split(":");
-    const postId = parseInt(payloadValue[0]);
-    const index = parseInt(payloadValue[1]);
-    const rideIds = riderIds[index].join(":");
-    fetch("/api/driveStatus", {
-      method: "post",
-      body: JSON.stringify({ postId: postId, status: "end", riderIds: rideIds }),
-    });
-  }
-
   // Load all my ride postings and the name of the riders of requested for them
   useEffect(() => {
     // Get all my posted rides
@@ -87,7 +40,6 @@ export default function Page() {
               return Promise.all(profilePromises);
             });
         });
-
         // Wait for all requestsPromises to resolve
         setPosting(posts);
         return Promise.all(requestsPromises);
@@ -120,7 +72,6 @@ export default function Page() {
               return Promise.all(riderIdPromises);
             });
         });
-
         // Wait for all requestsPromises to resolve
         return Promise.all(requestsPromises);
       })
@@ -234,81 +185,53 @@ export default function Page() {
         });
     }, []);
 
-  // Get status of rider request from database based on riderId and post index
-  function getStatus(index, riderId) {
-    if (accepted[index] != null && accepted[index].includes(riderId)) {
-      return <a> Accepted</a>;
-    } else if (declined[index] != null && declined[index].includes(riderId)) {
-      return <a> Declined</a>;
-    } else {
-      return " ";
-    }
-  }
 
-  // Get status of rider request from database based on riderId and post index
-  function getDriveStatus(postId) {
-    if (ended.includes(postId)) {
-      return <a> Completed</a>;
-    } else if (started.includes(postId)) {
-      return <a> Started</a>;
-    } else {
-      return " ";
+  function getDriveStatus() {
+    for (let post of posting) {
+        if (started.includes(post.id) && !ended.includes(post.id)) {
+            return post.id;
+        } else {
+            return -1;
+        }
     }
-  }
+}
 
-  const listAllRides = posting.map((post, index) => (
-    <div>
-      <h2 key={index}>{index + 1}.</h2>
-      <button value={post.id.toString() + ":" + index} onClick={startRideHandler}>Start Ride</button>
-      <button value={post.id.toString() + ":" + index} onClick={endRideHandler}>End Ride</button>
-      <a>{getDriveStatus(post.id)}</a>
-      <h5 key={index}>Pick Up Location: {post.startLoc}</h5>
-      <h5 key={index}>Destination: {post.endLoc}</h5>
-      <h5 key={index}>Date: {post.date}</h5>
-      <h5 key={index}>Time: {post.time}</h5>
-      <h5 key={index}>Seats: {post.seats}</h5>
-      <h5 key={index}>Price: {post.price}</h5>
-      <h5>Requests:</h5>
-      {
-        <div key={index}>
-          {" "}
-          {request[index] == null || riderIds[index] == null ? (
-            "Loading Requests"
-          ) : request[index].length == 0 ? (
-            <p>No Request</p>
-          ) : (
-            request[index].map((item, innerIndex) => (
-              <div>
-                <a key={innerIndex}>{item} </a>
-                <button
-                  value={
-                    post.id.toString() +
-                    ":" +
-                    riderIds[index][innerIndex].toString()
-                  }
-                  onClick={acceptedHandler}
-                >
-                  Accept
-                </button>
-                <button
-                  value={
-                    post.id.toString() +
-                    ":" +
-                    riderIds[index][innerIndex].toString()
-                  }
-                  onClick={declinedHandler}
-                >
-                  Decline
-                </button>
-                <a>{getStatus(index, riderIds[index][innerIndex])}</a>
+function displayActiveDrive(postId) {
+    var index = 0
+    for (let post of posting) {
+        if (post.id == postId){
+            return     <div>
+            <h2 key={index}>{index + 1}.</h2>
+            <h5 key={index}>Pick Up Location: {post.startLoc}</h5>
+            <h5 key={index}>Destination: {post.endLoc}</h5>
+            <h5 key={index}>Date: {post.date}</h5>
+            <h5 key={index}>Time: {post.time}</h5>
+            <h5 key={index}>Seats: {post.seats}</h5>
+            <h5 key={index}>Price: {post.price}</h5>
+            <h5>Your Riders:</h5>
+            {
+              <div key={index}>
+                {" "}
+                {request[index] == null || riderIds[index] == null ? (
+                  "Loading Riders"
+                ) : request[index].length == 0 && accepted[index] != null? (
+                  <p>No Riders</p>
+                ) : (
+                  request[index].map((item, innerIndex) => (
+                    <div>
+                      <a key={innerIndex}>{accepted[index].includes(riderIds[index][innerIndex])  ? item : ""} </a>
+                    </div>
+                  ))
+                )}
               </div>
-            ))
-          )}
-        </div>
-      }
-      <p>_______________________________________</p>
-    </div>
-  ));
+            }
+            <p>_______________________________________</p>
+          </div>
+        }
+        index = index + 1
+    }
+}
+
 
   return (
     <div>
@@ -317,8 +240,13 @@ export default function Page() {
       </a>
       <br />
       <strong>Back to Driver Home!</strong>
-      <h2>My Rides</h2>
-      {listAllRides}
+      <h2>My Active Ride</h2>
+      {
+        posting.length != 0 ? 
+            getDriveStatus() != -1 ? displayActiveDrive(getDriveStatus()) : "No Active Drive" 
+            : 
+            "Loading"
+      }
     </div>
   );
 }
