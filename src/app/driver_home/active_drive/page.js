@@ -206,7 +206,6 @@ function displayActiveDrive(postId) {
             <h5 key={index}>Destination: {post.endLoc}</h5>
             <h5 key={index}>Date: {post.date}</h5>
             <h5 key={index}>Time: {post.time}</h5>
-            <h5 key={index}>Seats: {post.seats}</h5>
             <h5 key={index}>Price: {post.price}</h5>
             <h5>Your Riders:</h5>
             {
