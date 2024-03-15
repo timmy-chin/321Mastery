@@ -25,6 +25,8 @@ model User {
   recievedMessages Message[]       @relation("Recipient")
   ridesGiven       Ride[]          @relation("Driver")
   ridesRequested   Request[]       @relation("Requester")
+  chatEngineSecret String? 
+  chatEngineId     Int?
 }
 
 model Message {
