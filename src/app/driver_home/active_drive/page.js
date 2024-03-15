@@ -212,7 +212,7 @@ function displayActiveDrive(postId) {
             {
               <div key={index}>
                 {" "}
-                {request[index] == null || riderIds[index] == null ? (
+                {request[index] == null || riderIds[index] == null || accepted[index] == null ? (
                   "Loading Riders"
                 ) : request[index].length == 0 && accepted[index] != null? (
                   <p>No Riders</p>
@@ -240,7 +240,7 @@ function displayActiveDrive(postId) {
       </a>
       <br />
       <strong>Back to Driver Home!</strong>
-      <h2>My Active Ride</h2>
+      <h2>My Active Drive</h2>
       {
         posting.length != 0 ? 
             getDriveStatus() != -1 ? displayActiveDrive(getDriveStatus()) : "No Active Drive" 

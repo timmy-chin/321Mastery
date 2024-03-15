@@ -105,6 +105,16 @@ CREATE TABLE "Declined" (
 );
 
 -- CreateTable
+CREATE TABLE "DriveStatus" (
+    "id" SERIAL NOT NULL,
+    "postId" INTEGER NOT NULL,
+    "status" TEXT NOT NULL,
+    "riderIds" TEXT NOT NULL,
+
+    CONSTRAINT "DriveStatus_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "_ConversationParticipants" (
     "A" INTEGER NOT NULL,
     "B" INTEGER NOT NULL

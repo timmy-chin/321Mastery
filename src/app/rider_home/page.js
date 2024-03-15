@@ -105,6 +105,30 @@ export default function Home() {
 
         <Button
           component={Link}
+          href="/rider_home/active_ride"
+          sx={{
+            fontWeight: 700,
+            width: "200px",
+            height: "50px",
+            backgroundColor: "white",
+            color: "black",
+            border: "2px solid black",
+            borderRadius: "8px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            cursor: "pointer",
+            "&:hover": {
+              backgroundColor: "black",
+              color: "white",
+            },
+          }}
+        >
+          Active Ride
+        </Button>
+
+        <Button
+          component={Link}
           href="/rider_home/message"
           sx={{
             fontWeight: 700,

@@ -106,6 +106,30 @@ export default function Home() {
 
         <Button
           component={Link}
+          href="/driver_home/active_drive"
+          sx={{
+            fontWeight: 700,
+            width: "200px",
+            height: "50px",
+            backgroundColor: "white",
+            color: "black",
+            border: "2px solid black",
+            borderRadius: "8px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            cursor: "pointer",
+            "&:hover": {
+              backgroundColor: "black",
+              color: "white",
+            },
+          }}
+        >
+          Active Drive
+        </Button>
+
+        <Button
+          component={Link}
           href="/driver_home/message"
           sx={{
             fontWeight: 700,
