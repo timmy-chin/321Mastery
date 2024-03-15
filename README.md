@@ -79,3 +79,8 @@ npx prisma studio
 
 add this to your env file 
 CHATENGINE_PRIVATE_KEY="209ee6b2-5a5c-480e-8702-878e87e2c968"
+
+
+npm install react-chat-engine
+
+npm install node-fetch
