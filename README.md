@@ -78,9 +78,13 @@ npx prisma studio
 ```
 
 add this to your env file 
-CHATENGINE_PRIVATE_KEY="209ee6b2-5a5c-480e-8702-878e87e2c968"
-
+CHATENGINE_PRIVATE_KEY="4a5aae9b-390b-4102-99bb-dbc43a5f2523"
+CHATENGINE_PROJECT_ID="c5709cf0-c535-4496-b825-aa06c9c8aa53"
 
 npm install react-chat-engine
 
 npm install node-fetch
+
+npm install axios
+
+
