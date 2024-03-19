@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/db";
 import bcrypt from 'bcryptjs';
-import fetch from 'node-fetch'; // If node-fetch is not installed, use 'npm install node-fetch'
+import axios from 'axios'; // Ensure axios is imported
 
 export async function POST(request) {
   const data = await request.formData();
@@ -10,9 +10,6 @@ export async function POST(request) {
   const firstName = data.get('firstname');
   const lastName = data.get('lastname');
   const confirmation = data.get('confirmation');
-  const age = data.get('age');
-  const gender = data.get('gender');
-
   
   if (email && password && firstName && lastName && confirmation === password) {
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -20,25 +17,18 @@ export async function POST(request) {
     try {
       // Create the user in your database
       let user = await prisma.user.create({
-        data: { 
-          email: email, 
-          password: hashedPassword, 
-          firstName: firstName, 
-          lastName: lastName,
-          age: age,
-          gender: gender 
-        },
+        data: { email, password: hashedPassword, firstName, lastName },
       });
 
-      // Create the ChatEngine user
-      const chatEngineUser = await createChatEngineUser(email, "notsecret");
+      // Explicitly set a hardcoded secret for the ChatEngine user creation
+      const hardcodedSecret = "your_predefined_hardcoded_secret"; // Replace with your actual hardcoded secret
+      const chatEngineUser = await createChatEngineUser(email, hardcodedSecret);
 
-      // Update the user's record in your database with the ChatEngine secret
+      // Update the user's record in your database with the ChatEngine secret and ID
       if (chatEngineUser && chatEngineUser.secret) {
         user = await prisma.user.update({
           where: { email: email },
-          data: { chatEngineSecret: chatEngineUser.secret ,
-          chatEngineId: chatEngineUser.id,}
+          data: { chatEngineSecret: hardcodedSecret, chatEngineId: chatEngineUser.id } // Use the hardcoded secret for update
         });
       }
 
@@ -46,6 +36,7 @@ export async function POST(request) {
       console.log('User Updated with ChatEngine Secret:', user);
       return new Response(JSON.stringify(user), { status: 200 });
     } catch (e) {
+      console.error(`User creation failed: ${e}`);
       return new Response(JSON.stringify({ error: e.message }), { status: 500 });
     }
   } else {
@@ -54,23 +45,22 @@ export async function POST(request) {
 }
 
 async function createChatEngineUser(email, secret) {
-  const response = await fetch('https://api.chatengine.io/users/', {
-    method: 'POST',
-    headers: {
-      'Private-Key': process.env.CHATENGINE_PRIVATE_KEY,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
+  try {
+    const response = await axios.post('https://api.chatengine.io/users/', {
       username: email,
-      secret: secret,
-    }),
-  });
+      secret: secret, // This secret is the hardcoded value you provide
+    }, {
+      headers: {
+        'Private-Key': process.env.CHATENGINE_PRIVATE_KEY,
+        'Content-Type': 'application/json',
+      },
+    });
 
-  if (!response.ok) {
-    throw new Error(`ChatEngine user creation failed: ${response.statusText}`);
+    return response.data;
+  } catch (error) {
+    console.error(`ChatEngine user creation failed: ${error}`);
+    throw new Error(`ChatEngine user creation failed: ${error.response.statusText}`);
   }
-
-  return await response.json();
 }
 
 export async function GET(request){
@@ -88,6 +78,7 @@ export async function GET(request){
         },
       });
     } catch (e) {
+      console.error(`User lookup failed: ${e}`);
       return NextResponse.json({error: e.message}, {status: 500 })
     }
     return NextResponse.json(user);
