@@ -56,7 +56,7 @@ export default function RootLayout({ children, title }) {
                 variant="h6"
                 noWrap
                 component="a"
-                href="/"
+                href={status == "authenticated"? "/driver_home" : ""}
                 sx={{
                   mr: 2,
                   display: { xs: "none", md: "flex" },
