@@ -85,63 +85,69 @@ export default function Home() {
       <br />
       <strong>Back to Driver Home!</strong>
       <h1>Create a Ride</h1>
-      <p>Start Location</p>
-      <input
-        type="text"
-        value={startLoc}
-        onChange={startLocChanged}
-        size="50"
-      />
+      {
+        posted == false ?
+        <div>
+          <p>Start Location</p>
+          <input
+            type="text"
+            value={startLoc}
+            onChange={startLocChanged}
+            size="50"
+          />
 
-      <p>End Location</p>
-      <input type="text" value={endLoc} onChange={endLocChanged} size="50" />
+          <p>End Location</p>
+          <input type="text" value={endLoc} onChange={endLocChanged} size="50" />
 
-      <p></p>
+          <p></p>
 
-      <p>Date</p>
-      <label>
-        <input type="text" value={date} onChange={dateChanged} />
-      </label>
+          <p>Date</p>
+          <label>
+            <input type="text" value={date} onChange={dateChanged} />
+          </label>
 
-      <p>Time</p>
-      <label>
-        <input type="text" value={time} onChange={timeChanged} />
-        <input type="checkbox" />
-        AM
-        <input type="checkbox" />
-        PM
-      </label>
+          <p>Time</p>
+          <label>
+            <input type="text" value={time} onChange={timeChanged} />
+            <input type="checkbox" />
+            AM
+            <input type="checkbox" />
+            PM
+          </label>
 
-      <p></p>
+          <p></p>
 
-      <label>
-        <input type="checkbox" />
-        Reoccuring?
-      </label>
+          <label>
+            <input type="checkbox" />
+            Reoccuring?
+          </label>
 
-      <p></p>
+          <p></p>
 
-      <label>
-        <input type="checkbox" /> <input type="checkbox" />{" "}
-        <input type="checkbox" /> <input type="checkbox" />{" "}
-        <input type="checkbox" /> <input type="checkbox" />{" "}
-        <input type="checkbox" />
-      </label>
+          <label>
+            <input type="checkbox" /> <input type="checkbox" />{" "}
+            <input type="checkbox" /> <input type="checkbox" />{" "}
+            <input type="checkbox" /> <input type="checkbox" />{" "}
+            <input type="checkbox" />
+          </label>
 
-      <p> S M T W Th F Sat</p>
+          <p> S M T W Th F Sat</p>
 
-      <p>Seat(s)</p>
-      <input type="text" value={seats} onChange={seatsChanged} />
+          <p>Seat(s)</p>
+          <input type="text" value={seats} onChange={seatsChanged} />
 
-      <p>Price (USD)</p>
-      <input type="text" value={price} onChange={priceChanged} />
+          <p>Price (USD)</p>
+          <input type="text" value={price} onChange={priceChanged} />
 
-      <p></p>
+          <p></p>
 
-      <button type="button" onClick={postRide}>
-        Post Ride
-      </button>
-      <a>{posted ? " Posted!" : ""}</a>
+          <button type="button" onClick={postRide}>
+            Post Ride
+          </button>
+        </div>
+        :
+        <h5>Your Ride has been Posted! <a href="/rider_home/findride">Click here to view ride</a></h5>
+      }
     </>
   );
 }

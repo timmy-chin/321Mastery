@@ -12,28 +12,36 @@ export default function Page() {
     "https://t4.ftcdn.net/jpg/00/64/67/27/240_F_64672736_U5kpdGs9keUll8CRQ3p3YaEv2M6qkVY5.jpg",
   ];
 
-  // Get all requeseted ride posting
-  useEffect(() => {
-    const url = "/api/request?riderId=all";
-    fetch(url, { method: "get" })
-      .then((response) => response.ok && response.json())
-      .then((requests) => {
-        const request = requests.map((request, index) => {
-          return request.postId;
-        });
-        const url = "/api/rideposting";
-        fetch(url, { method: "get" })
-          .then((response) => response.ok && response.json())
-          .then((post) => {
-            const myRideResult = post.map((p, index) => {
-              if (request.includes(p.id)) {
-                return p;
-              }
-            });
-            setMyRides(myRideResult);
+    // Get all requeseted ride posting
+    useEffect(() => {
+      const url = "/api/request?riderId=all";
+      fetch(url, { method: "get" })
+        .then((response) => response.ok && response.json())
+        .then((requests) => {
+          const request = requests.map((request, index) => {
+            return request.postId;
           });
+          const url = "/api/driveStatus?end=all";
+          fetch(url)
+            .then((response) => response.ok && response.json())
+            .then((allStatus) => {
+              const ended = allStatus.map((status) => {
+                return status.postId;
+              });
+              const url = "/api/rideposting";
+              fetch(url, { method: "get" })
+                .then((response) => response.ok && response.json())
+                .then((post) => {
+                  const myRideResult = post.map((p, index) => {
+                    if (request.includes(p.id) && !ended.includes(p.id)) {
+                      return p;
+                    }
+                  });
+                  setMyRides(myRideResult);
+                });
+        });
       });
-  }, []);
+    }, []);
 
   // Get all my accepted request
   useEffect(() => {

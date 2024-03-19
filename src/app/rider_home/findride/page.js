@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { checkLoggedIn } from "@/lib/auth";
 import { SlArrowLeftCircle } from "react-icons/sl";
+import { useRouter } from 'next/navigation'
 
 function Home() {
   const [location, setLocation] = useState("");
@@ -11,6 +12,8 @@ function Home() {
   const [time, setTime] = useState("");
   const [recur, setRecur] = useState(false);
   const [posting, setPosting] = useState([]);
+  const [requested, setRequested] = useState(false)
+  const router = useRouter()
 
   const pfpList = [
     "https://t4.ftcdn.net/jpg/00/64/67/27/240_F_64672736_U5kpdGs9keUll8CRQ3p3YaEv2M6qkVY5.jpg",
@@ -56,6 +59,7 @@ function Home() {
   }
 
   function requestRideHandler(event) {
+    setRequested(true)
     const postIdx = event.target.value;
     posting.map((post, index) => {
       if (index == parseInt(postIdx)) {
@@ -102,49 +106,55 @@ function Home() {
       <br />
       <strong>Back to Rider Home!</strong>
       <h1>Search Drivers</h1>
+      {
+        requested == false ? 
+        <div>
+          <h4>Pick Up Location</h4>
+          <input
+            type="text"
+            value={location}
+            onChange={locationChanged}
+            size="50"
+          ></input>
 
-      <h4>Pick Up Location</h4>
-      <input
-        type="text"
-        value={location}
-        onChange={locationChanged}
-        size="50"
-      ></input>
+          <h4>Destination</h4>
+          <input
+            type="text"
+            value={destination}
+            onChange={destinationChanged}
+            size="50"
+          ></input>
 
-      <h4>Destination</h4>
-      <input
-        type="text"
-        value={destination}
-        onChange={destinationChanged}
-        size="50"
-      ></input>
+          <h4>Arrival Date & Time:</h4>
+          <input type="text" value={date} onChange={dateChanged} size="20"></input>
+          <img
+            src="https://static.vecteezy.com/system/resources/previews/005/988/959/original/calendar-icon-free-vector.jpg"
+            width="30"
+            height="30"
+          />
+          <input type="text" value={time} onChange={timeChanged} size="20"></input>
+          <img
+            src="https://www.shutterstock.com/image-vector/clock-icon-trendy-flat-style-600nw-674379841.jpg"
+            width="30"
+            height="30"
+          />
 
-      <h4>Arrival Date & Time:</h4>
-      <input type="text" value={date} onChange={dateChanged} size="20"></input>
-      <img
-        src="https://static.vecteezy.com/system/resources/previews/005/988/959/original/calendar-icon-free-vector.jpg"
-        width="30"
-        height="30"
-      />
-      <input type="text" value={time} onChange={timeChanged} size="20"></input>
-      <img
-        src="https://www.shutterstock.com/image-vector/clock-icon-trendy-flat-style-600nw-674379841.jpg"
-        width="30"
-        height="30"
-      />
+          <p></p>
+          <a>Recurring?</a>
+          <input type="checkbox" value={recur} onChange={recurChanged}></input>
 
-      <p></p>
-      <a>Recurring?</a>
-      <input type="checkbox" value={recur} onChange={recurChanged}></input>
+          <p></p>
 
-      <p></p>
+          <button onClick={searchHandler}>Search</button>
 
-      <button onClick={searchHandler}>Search</button>
+          <p></p>
 
-      <p></p>
-
-      <h2>Drivers</h2>
-      <p>{listAllPost}</p>
+          <h2>Drivers</h2>
+          <p>{listAllPost}</p>
+        </div>
+        :
+        <h3>Thank you for requesting for a Ride! <a href="/rider_home/active">Click here to view your Requested Ride</a></h3>
+      }
     </div>
   );
 }

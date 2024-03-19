@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import { SlArrowLeftCircle } from "react-icons/sl";
+import { useRouter } from 'next/navigation'
 
 export default function Page() {
   const [posting, setPosting] = useState([]);
@@ -12,6 +13,7 @@ export default function Page() {
   const [declined, setDeclined] = useState([]);
   const [started, setStarted] = useState([]);
   const [ended, setEnded] = useState([]);
+  const router = useRouter()
 
 
 
@@ -47,6 +49,7 @@ export default function Page() {
       method: "post",
       body: JSON.stringify({ postId: postId, status: "start", riderIds: rideIds }),
     });
+    router.push("/driver_home/active_drive")
   }
 
   function endRideHandler(event) {
@@ -59,6 +62,7 @@ export default function Page() {
       method: "post",
       body: JSON.stringify({ postId: postId, status: "end", riderIds: rideIds }),
     });
+    router.push("/driver_home/active_drive")
   }
 
   // Load all my ride postings and the name of the riders of requested for them
