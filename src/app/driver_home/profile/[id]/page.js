@@ -35,7 +35,7 @@ function getAverage(list) {
 
     // Calculate the average
     var average = sum / list.length;
-    return average;
+    return average.toFixed(2);
 }
 
   // Get all my rating
