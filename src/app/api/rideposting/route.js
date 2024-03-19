@@ -10,12 +10,24 @@ export async function GET(request) {
   const date = searchParams.get('date');
   const time = searchParams.get('time');
   const userId = searchParams.get('userId');
+  const postId = searchParams.get('postId');
 
   if (userId != null){
     const driverPost = await prisma.Posting.findMany({
       where: {
         driverId: {
           equals: loggedInData.user?.id
+        }
+      }
+    });
+    return NextResponse.json(driverPost);
+  }
+
+  if (postId != null){
+    const driverPost = await prisma.Posting.findMany({
+      where: {
+        id: {
+          equals: parseInt(postId)
         }
       }
     });

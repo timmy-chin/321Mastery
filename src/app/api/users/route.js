@@ -10,6 +10,9 @@ export async function POST(request) {
   const firstName = data.get('firstname');
   const lastName = data.get('lastname');
   const confirmation = data.get('confirmation');
+  const age = data.get('age');
+  const gender = data.get('gender');
+
   
   if (email && password && firstName && lastName && confirmation === password) {
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -17,7 +20,14 @@ export async function POST(request) {
     try {
       // Create the user in your database
       let user = await prisma.user.create({
-        data: { email, password: hashedPassword, firstName, lastName },
+        data: { 
+          email: email, 
+          password: hashedPassword, 
+          firstName: firstName, 
+          lastName: lastName,
+          age: age,
+          gender: gender 
+        },
       });
 
       // Create the ChatEngine user

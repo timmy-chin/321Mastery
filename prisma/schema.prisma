@@ -17,6 +17,7 @@ model User {
   password         String 
   firstName        String
   lastName         String
+  age              String?
   gender           String?
   cpVerified       Int?
   dlVerified       Int?
@@ -115,4 +116,10 @@ model DriveStatus {
   postId Int
   status String
   riderIds String
+}
+
+model Rating {
+  id Int @id @default(autoincrement())
+  driverId Int
+  rating Int
 }

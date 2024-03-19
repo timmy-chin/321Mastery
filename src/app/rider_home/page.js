@@ -4,8 +4,22 @@ import Link from "next/link";
 import { Button } from "@mui/material";
 import MyMap from "./map";
 import Logout from "../Logout";
+import { useState, useEffect } from "react";
 
 export default function Home() {
+  const [userId, setUserId] = useState([]);
+
+    // Load user Id
+    useEffect(() => {
+      // Get all my posted rides
+      const url = "/api/getProfile?userid=getID";
+      fetch(url)
+        .then((response) => response.ok && response.json())
+        .then((userId) => {
+          setUserId(userId);
+        });
+    }, []);
+
   return (
     <Box
       sx={{
@@ -153,7 +167,7 @@ export default function Home() {
 
         <Button
           component={Link}
-          href="/rider_home/profile"
+          href={"/rider_home/profile/"+userId}
           sx={{
             fontWeight: 700,
             width: "200px",

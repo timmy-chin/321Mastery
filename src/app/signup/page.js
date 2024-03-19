@@ -3,12 +3,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Button from "@mui/material/Button";
+import { useState, useEffect } from "react";
 
 export default function Home() {
   const router = useRouter();
+  const [signedUp, setSignedUp] = useState(false);
 
   function handleSignup(event) {
     const data = new FormData(event.currentTarget);
+    setSignedUp(true)
+    router.push("/")
     fetch("/api/users", {
       method: "post",
       body: data,
@@ -37,122 +41,174 @@ export default function Home() {
         }}>
         <h1 style={{ fontFamily: "Avenir, sans-serif", fontSize: "38px" }}>Carpool With Me</h1>
         <h3 style={{ fontFamily: "Avenir, sans-serif"}}>Sign-Up</h3>
-        <form onSubmit={handleSignup} style={{ textAlign: "left" }}>
-          {/* <label htmlFor="email">CalPoly Email:</label> */}
-          <input
-            type="text"
-            id="email"
-            name="email"
-            placeholder="Email"
-            required
-            style={{
-              width: '300px',
-              boxSizing: 'border-box',
-              border: '2px solid #000',
-              borderRadius: '4px',
-              fontSize: '16px',
-              color: '#000',
-              backgroundColor: 'white',
-              padding: '12px 20px 12px 12px',
-              marginBottom: '20px', 
-            }}
-          />
-          <br />
-          {/* <label htmlFor="password">Password:</label> */}
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Password"
-            required
-            style={{
-              width: '300px',
-              boxSizing: 'border-box',
-              border: '2px solid #000',
-              borderRadius: '4px',
-              fontSize: '16px',
-              color: '#000',
-              backgroundColor: 'white',
-              padding: '12px 20px 12px 12px',
-              marginBottom: '20px', 
-            }}
-          />
-          <br />
-          <input
-            type="password"
-            id="confirmation"
-            name="confirmation"
-            placeholder="Confirm Password"
-            required
-            style={{
-              width: '300px',
-              boxSizing: 'border-box',
-              border: '2px solid #000',
-              borderRadius: '4px',
-              fontSize: '16px',
-              color: '#000',
-              backgroundColor: 'white',
-              padding: '12px 20px 12px 12px',
-              marginBottom: '20px', 
-            }}
-          />
-          <br />
-          {/* <label htmlFor="firstname">Enter your First Name:</label> */}
-          <input
-            type="text"
-            id="firstname"
-            name="firstname"
-            placeholder="First Name"
-            required
-            style={{
-              width: '300px',
-              boxSizing: 'border-box',
-              border: '2px solid #000',
-              borderRadius: '4px',
-              fontSize: '16px',
-              color: '#000',
-              backgroundColor: 'white',
-              padding: '12px 20px 12px 12px',
-              marginBottom: '20px', 
-            }}
-          />
-          {/* <label htmlFor="lastname">Enter your Last Name:</label> */}
-          <input
-            type="text"
-            id="lastname"
-            name="lastname"
-            placeholder="Last Name"
-            required
-            style={{
-              width: '300px',
-              boxSizing: 'border-box',
-              border: '2px solid #000',
-              borderRadius: '4px',
-              fontSize: '16px',
-              color: '#000',
-              backgroundColor: 'white',
-              padding: '12px 20px 12px 12px',
-              marginBottom: '0px', 
-            }}
-          />
-          <br />
-          
+
+        {signedUp == false ?
+            <form onSubmit={handleSignup} style={{ textAlign: "left" }}>
+            {/* <label htmlFor="email">CalPoly Email:</label> */}
+            <input
+              type="text"
+              id="email"
+              name="email"
+              placeholder="Email"
+              required
+              style={{
+                width: '300px',
+                boxSizing: 'border-box',
+                border: '2px solid #000',
+                borderRadius: '4px',
+                fontSize: '16px',
+                color: '#000',
+                backgroundColor: 'white',
+                padding: '12px 20px 12px 12px',
+                marginBottom: '20px', 
+              }}
+            />
+            <br />
+            {/* <label htmlFor="password">Password:</label> */}
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Password"
+              required
+              style={{
+                width: '300px',
+                boxSizing: 'border-box',
+                border: '2px solid #000',
+                borderRadius: '4px',
+                fontSize: '16px',
+                color: '#000',
+                backgroundColor: 'white',
+                padding: '12px 20px 12px 12px',
+                marginBottom: '20px', 
+              }}
+            />
+            <br />
+            <input
+              type="password"
+              id="confirmation"
+              name="confirmation"
+              placeholder="Confirm Password"
+              required
+              style={{
+                width: '300px',
+                boxSizing: 'border-box',
+                border: '2px solid #000',
+                borderRadius: '4px',
+                fontSize: '16px',
+                color: '#000',
+                backgroundColor: 'white',
+                padding: '12px 20px 12px 12px',
+                marginBottom: '20px', 
+              }}
+            />
+            <br />
+            {/* <label htmlFor="firstname">Enter your First Name:</label> */}
+            <input
+              type="text"
+              id="firstname"
+              name="firstname"
+              placeholder="First Name"
+              required
+              style={{
+                width: '300px',
+                boxSizing: 'border-box',
+                border: '2px solid #000',
+                borderRadius: '4px',
+                fontSize: '16px',
+                color: '#000',
+                backgroundColor: 'white',
+                padding: '12px 20px 12px 12px',
+                marginBottom: '20px', 
+              }}
+            />
+            <br />
+            {/* <label htmlFor="lastname">Enter your Last Name:</label> */}
+            <input
+              type="text"
+              id="lastname"
+              name="lastname"
+              placeholder="Last Name"
+              required
+              style={{
+                width: '300px',
+                boxSizing: 'border-box',
+                border: '2px solid #000',
+                borderRadius: '4px',
+                fontSize: '16px',
+                color: '#000',
+                backgroundColor: 'white',
+                padding: '12px 20px 12px 12px',
+                marginBottom: '0px', 
+              }}
+            />
+            <br />
+            <p></p>
+            <input
+              type="text"
+              id="age"
+              name="age"
+              placeholder="Age"
+              required
+              style={{
+                width: '300px',
+                boxSizing: 'border-box',
+                border: '2px solid #000',
+                borderRadius: '4px',
+                fontSize: '16px',
+                color: '#000',
+                backgroundColor: 'white',
+                padding: '12px 20px 12px 12px',
+                marginBottom: '0px', 
+              }}
+            />
+            <br />
+            <p></p>
+            <input
+              type="text"
+              id="gender"
+              name="gender"
+              placeholder="Gender"
+              required
+              style={{
+                width: '300px',
+                boxSizing: 'border-box',
+                border: '2px solid #000',
+                borderRadius: '4px',
+                fontSize: '16px',
+                color: '#000',
+                backgroundColor: 'white',
+                padding: '12px 20px 12px 12px',
+                marginBottom: '0px', 
+              }}
+            />
+            <br />
+            
+
+          <a href="/">
+            <Button type="submit"
+              style={{
+                width: '300px',
+                marginTop: "20px",
+                border: '2px solid #000', // Black border
+                backgroundColor: '#000', // Solid black background color
+                color: '#fff', // Text color (white)
+                justifyContent: 'center',
+              }}
+              >Sign-Up</Button>
+          </a>
+          </form>
+        :
+
+        <h3>Sign Up Successful! Thank you!</h3>
+        
+        }
+        
         <div style={{ marginTop: "0px", width: "300px", textAlign: "center"}}>
           <p>
             Have have an account? <Link href="/"> Log-In</Link>
           </p>
         </div>
-          <Button type="submit"
-          style={{
-            width: '300px',
-            marginTop: "20px",
-            border: '2px solid #000', // Black border
-            backgroundColor: '#000', // Solid black background color
-            color: '#fff', // Text color (white)
-            justifyContent: 'center',
-          }}
-          >Sign-Up</Button>
-        </form>
 
         
       </div>

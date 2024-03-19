@@ -8,6 +8,8 @@ CREATE TABLE "User" (
     "gender" TEXT,
     "cpVerified" INTEGER,
     "dlVerified" INTEGER,
+    "chatEngineSecret" TEXT,
+    "chatEngineId" INTEGER,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );

@@ -1,8 +1,10 @@
 "use client";
+import { PagesRounded } from '@mui/icons-material';
 import React, { useState, useEffect } from 'react';
 import { ChatEngine } from 'react-chat-engine';
 
-const ChatPage = () => {
+
+function Page() {
   const [chatCredentials, setChatCredentials] = useState({ userName: '', userSecret: '' });
 
   useEffect(() => {
@@ -27,6 +29,6 @@ const ChatPage = () => {
       userSecret="user"
     />
   );
-};
+}
 
-export default ChatPage;
+export default Page

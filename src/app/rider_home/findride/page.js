@@ -78,8 +78,10 @@ function Home() {
 
   const listAllPost = posting.map((post, index) => (
     <div>
-      <img src={pfpList[0]} width="100" height="100"></img>
-      <h3 key={index}>Driver Name: {post.driverName}</h3>
+
+      <p></p>
+      <a href={"/driver_home/profile/"+post.driverId}><img src={"https://t4.ftcdn.net/jpg/00/64/67/27/240_F_64672736_U5kpdGs9keUll8CRQ3p3YaEv2M6qkVY5.jpg"} width="100" height="100"></img></a>
+      <h3 key={index} href={"/driver_home/profile/"+post.driverId}>Driver Name: {post.driverName}</h3>
       <h5 key={index}>Pick Up Location: {post.startLoc}</h5>
       <h5 key={index}>Destination: {post.endLoc}</h5>
       <h5 key={index}>Date: {post.date}</h5>

@@ -76,7 +76,7 @@ export default function Page() {
     <div>
       {post != null ? ( // if
         <div>
-          <img src={pfpList[0]} width="100" height="100"></img>
+          <a href={"/driver_home/profile/"+post.driverId}><img src={pfpList[0]} width="100" height="100"></img></a>
           <h3 key={index}>Driver: {post.driverName}</h3>
           <h5 key={index}>Pick Up Location: {post.startLoc}</h5>
           <h5 key={index}>Destination: {post.endLoc}</h5>

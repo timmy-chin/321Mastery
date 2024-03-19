@@ -278,7 +278,8 @@ export default function Page() {
           ) : (
             request[index].map((item, innerIndex) => (
               <div>
-                <a key={innerIndex}>{item} </a>
+                <a href={"/rider_home/profile/"+riderIds[index][innerIndex]}><img src={"https://t4.ftcdn.net/jpg/00/64/67/27/240_F_64672736_U5kpdGs9keUll8CRQ3p3YaEv2M6qkVY5.jpg"} width="30" height="30"></img></a>
+                <a key={innerIndex} > {item} </a>
                 <button
                   value={
                     post.id.toString() +

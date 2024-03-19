@@ -4,8 +4,24 @@ import Link from "next/link";
 import { Button } from "@mui/material";
 import MyMap from "./map";
 import Logout from "../Logout";
+import { useState, useEffect } from "react";
+import { SlArrowLeftCircle } from "react-icons/sl";
+
 
 export default function Home() {
+  const [userId, setUserId] = useState([]);
+
+    // Load user Id
+    useEffect(() => {
+      // Get all my posted rides
+      const url = "/api/getProfile?userid=getID";
+      fetch(url)
+        .then((response) => response.ok && response.json())
+        .then((userId) => {
+          setUserId(userId);
+        });
+    }, []);
+
   return (
     <Box
       sx={{
@@ -154,7 +170,7 @@ export default function Home() {
 
         <Button
           component={Link}
-          href="/driver_home/profile"
+          href={"/driver_home/profile/"+userId}
           sx={{
             fontWeight: 700,
             width: "200px",
@@ -174,6 +190,30 @@ export default function Home() {
           }}
         >
           Profile
+        </Button>
+
+        <Button
+          component={Link}
+          href={"/uploaddl"}
+          sx={{
+            fontWeight: 700,
+            width: "200px",
+            height: "50px",
+            backgroundColor: "white",
+            color: "black",
+            border: "2px solid black",
+            borderRadius: "8px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            cursor: "pointer",
+            "&:hover": {
+              backgroundColor: "black",
+              color: "white",
+            },
+          }}
+        >
+          Get Verified
         </Button>
       </Box>
       <MyMap />
