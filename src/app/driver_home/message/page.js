@@ -1,31 +1,39 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { ChatEngine } from 'react-chat-engine';
+import axios from 'axios';
 
 const ChatPage = () => {
-  const [chatCredentials, setChatCredentials] = useState({ userName: '', userSecret: '' });
+  const [email, setEmail] = useState('');
+  const [secret] = useState('your_predefined_hardcoded_secret');
+  const [loaded, setLoaded] = useState(false); // New state to track if the credentials are loaded
 
   useEffect(() => {
     const fetchCredentials = async () => {
-      const response = await fetch('/api/getChatCredentials');
-      if (!response.ok) {
-        console.error('Failed to fetch chat credentials');
-        return;
+      try {
+        const response = await axios.get('/api/getChatCredentials');
+        const data = response.data;
+        setEmail(data.email);
+        setLoaded(true); // Set loaded to true once the email is fetched
+      } catch (error) {
+        console.error('Failed to fetch chat credentials', error);
       }
-      const credentials = await response.json();
-      setChatCredentials({ userName: credentials.email, userSecret: credentials.secret });
     };
 
     fetchCredentials();
   }, []);
 
-  return (
+  // Conditional rendering based on whether the credentials are loaded
+  return loaded ? ( // Only render ChatEngine if credentials are loaded
     <ChatEngine
       height="100vh"
-      projectID="150eeeeb-3ade-4261-9489-11f62be94afd"// Replace with your actual project ID
-      userName="user"
-      userSecret="user"
+      projectID="c5709cf0-c535-4496-b825-aa06c9c8aa53"
+      userName={email}
+      userSecret={secret}
+      ChatEngine offset={-7}
     />
+  ) : (
+    <div>Loading Chat...</div> // Display a loading message or spinner while waiting for credentials
   );
 };
 
