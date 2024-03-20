@@ -123,3 +123,8 @@ model Rating {
   driverId Int
   rating Int
 }
+
+model Verify {
+  id Int @id @default(autoincrement())
+  userId Int
+}

@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 export default function Page({params}) {
   const [userData, setUserData] = useState(null); // State to store fetched user data
   const [profile, setProfile] = useState([]);
+  const [verified, setVerified] = useState(false);
   const [rating, setRating] = useState(0);
   const [totalRating, setTotalRating] = useState(0);
 
@@ -18,6 +19,18 @@ export default function Page({params}) {
       .then((response) => response.ok && response.json())
       .then((profile) => {
         setProfile(profile);
+      });
+  }, []);
+
+  // Load verification from id
+  useEffect(() => {
+    // Get all my posted rides
+    const url = "/api/verify?userId="+params.id;
+    fetch(url)
+      .then((response) => response.ok && response.json())
+      .then((verify) => {
+        if (verify.length != 0)
+          setVerified(true);
       });
   }, []);
 
@@ -119,7 +132,7 @@ function getAverage(list) {
             <p>Email: {profile[0]?.email}</p>
             <p>Age: {profile[0].age} years old</p>
             <p>Gender: {profile[0].gender}</p>
-            <p>Verified: </p>
+            <p>Verification: {verified ? "Verified" : "Not Verified"}</p>
             <p>Ratings: {rating}/5 ({totalRating} Ratings)</p>
           </div>
         </div>
