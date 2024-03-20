@@ -322,7 +322,7 @@ export default function Page() {
       <br />
       <strong>Back to Driver Home!</strong>
       <h2>My Rides</h2>
-      {listAllRides}
+      {posting.length != 0 ? listAllRides : "No Rides Posted"}
     </div>
   );
 }

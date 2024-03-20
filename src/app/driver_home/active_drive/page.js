@@ -276,7 +276,7 @@ function displayActiveDrive(postId) {
         posting.length != 0? 
             getDriveStatus() != -1 ? displayActiveDrive(getDriveStatus()) : "No Active Drive, Thanks for Driving!"
             : 
-            "Loading"
+            "Waiting for Drive to Start"
       }
     </div>
   );

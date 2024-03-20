@@ -377,9 +377,7 @@ function displayRateMyRidePage(postId){
       index = index + 1
   }
 }
-if (myRides.length == 0) {
-  return;
-}
+
   return (
     <div>
       <a href="/rider_home">

@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import { SlArrowLeftCircle } from "react-icons/sl";
 
 export default function UploadLicense() {
   const [licenseImage, setLicenseImage] = useState(null);
@@ -20,6 +21,9 @@ export default function UploadLicense() {
         color: "black",
       }}
     >
+      <a href="/driver_home">
+        <SlArrowLeftCircle size={32} />
+      </a>
       <h1>Upload Driver's License</h1>
       <div style={{ borderBottom: "1px solid black", marginBottom: "20px" }}></div>
       <div style={{ marginBottom: "20px" }}>

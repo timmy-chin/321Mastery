@@ -108,7 +108,7 @@ export default function Page() {
       <br />
       <strong>Back to Rider Home!</strong>
       <h2>Your Requested Rides</h2>
-      {myRides.length != 0 ? listAllRides : <h4>Loading Rides...</h4>}
+      {myRides.length != 0 ? listAllRides : <h4>Waiting for Ride Requests...</h4>}
     </div>
   );
 }
