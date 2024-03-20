@@ -32,22 +32,18 @@ npx prisma migrate dev
 
 Name the migration `initial`
 
-Install Google Maps React and ChatEngine, etc.
+Install Google Maps React, Install Icons, ChatEngine, etc.
 
 ```bash
 npm i -S @react-google-maps/api
+
+npm install react-icons --save
 
 npm install react-chat-engine
 
 npm install node-fetch
 
 npm install axios
-```
-
-Install Icons
-
-```bash
-npm install react-icons --save
 ```
 
 Finally, run the development server:
