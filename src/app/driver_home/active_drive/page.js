@@ -273,7 +273,7 @@ function displayActiveDrive(postId) {
       <strong>Back to Driver Home!</strong>
       <h2>My Active Drive</h2>
       {
-        posting.length != 0 && ended.length != 0 && started.length != 0? 
+        posting.length != 0? 
             getDriveStatus() != -1 ? displayActiveDrive(getDriveStatus()) : "No Active Drive, Thanks for Driving!"
             : 
             "Loading"

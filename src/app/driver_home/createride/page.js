@@ -146,7 +146,7 @@ export default function Home() {
           </button>
         </div>
         :
-        <h5>Your Ride has been Posted! <a href="/rider_home/findride">Click here to view ride</a></h5>
+        <h5>Your Ride has been Posted! <a href="/driver_home/active">Click here to view ride</a></h5>
       }
     </>
   );

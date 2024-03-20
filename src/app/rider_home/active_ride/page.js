@@ -251,9 +251,6 @@ function getStartedRide() {
 }
 
 function getMostRecentEndedRide() {
-  if (myRides[0] == null) {
-    return -1;
-  }
   const myRequests = myRides.map((ride, index) => {
     if (ride != null){
       return ride.id;
@@ -392,7 +389,7 @@ if (myRides.length == 0) {
       <strong>Back to Rider Home!</strong>
       <h2>Your Active Ride</h2>
       {
-        posting.length != 0 && myRides.length != 0 && ended.length != 0 && started.length != 0 ? 
+        posting.length != 0 && myRides.length != 0? 
             getStartedRide() != -1 ? 
               displayActiveRide(getStartedRide()) 
               : 
@@ -401,7 +398,7 @@ if (myRides.length == 0) {
                 :
                 "No Active Ride"
             : 
-            "Loading"
+            "Waiting for Ride to Start"
       } 
     </div>
   );
