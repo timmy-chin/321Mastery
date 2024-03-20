@@ -20,6 +20,8 @@ create one in the root of your repo with the following information:
 ```
 DATABASE_URL="postgresql://admin:password@localhost:5432/mydb?schema=public"
 NEXTAUTH_SECRET="<some secret here>"
+CHATENGINE_PRIVATE_KEY="4a5aae9b-390b-4102-99bb-dbc43a5f2523"
+CHATENGINE_PROJECT_ID="c5709cf0-c535-4496-b825-aa06c9c8aa53"
 ```
 
 Make sure the database is migrated. 
@@ -30,10 +32,16 @@ npx prisma migrate dev
 
 Name the migration `initial`
 
-Install Google Maps React
+Install Google Maps React and ChatEngine, etc.
 
 ```bash
 npm i -S @react-google-maps/api
+
+npm install react-chat-engine
+
+npm install node-fetch
+
+npm install axios
 ```
 
 Install Icons
@@ -76,16 +84,5 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ```bash
 npx prisma studio
 ```
-
-add this to your env file 
-CHATENGINE_PRIVATE_KEY="4a5aae9b-390b-4102-99bb-dbc43a5f2523"
-
-CHATENGINE_PROJECT_ID="c5709cf0-c535-4496-b825-aa06c9c8aa53"
-
-npm install react-chat-engine
-
-npm install node-fetch
-
-npm install axios
 
 
