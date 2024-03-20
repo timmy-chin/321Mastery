@@ -8,7 +8,21 @@ First, get a database running. You will need Docker installed on your machine.
 docker-compose up
 ```
 
-Then, make sure all your node modules are installs
+Two Options:
+
+Option 1:
+
+Use this build script we made to install all npm packages, create .env, prisma migrate, and npm run dev
+
+```bash
+chmod +x *.sh && ./build.sh
+```
+
+Option 2:
+
+Manually install all the packages, create .env, prisma migrate, and npm run dev
+
+Make sure all your node modules are installs
 
 ```bash
 npm install
