@@ -18,6 +18,8 @@ Use this build script we made to install all npm packages, create .env, prisma m
 chmod +x *.sh && ./build.sh
 ```
 
+And you're all set to use our app via local:3000
+
 #### Option 2:
 
 Manually install all the packages, create .env, prisma migrate, and npm run dev
@@ -66,9 +68,9 @@ Finally, run the development server:
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+You're all set to use our app
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
