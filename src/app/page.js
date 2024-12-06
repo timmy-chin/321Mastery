@@ -21,7 +21,7 @@ export default function Login() {
   function handleSignin() {
     signIn("normal", { ...formValues, redirect: false }).then((result) => {
       if (!result.error) {
-        router.push('/driver_home')
+        router.push('/mfa')
         reset();
       } else {
         setError(true);
